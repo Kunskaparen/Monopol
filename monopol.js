@@ -15,6 +15,7 @@ window.onload = function init() {
 	planBild.onload = function() {
 		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
 	
+	
 	};
 };
 
@@ -69,10 +70,47 @@ function die() {
 		
 	}
 }
+<<<<<<< HEAD
 function ritaPjäs(ruta) {
+=======
+
+function ritaPjäs(nummer, pjäs) {
+	if (pjäs === 1) {
+		var a = 10;
+		var b = 10;
+	}
+	if (pjäs === 2) {
+		var a = 20;
+		var b = 10;
+	}
+	if (pjäs === 3) {
+		var a = 10;
+		var b = 20;
+	}
+	if (pjäs === 4) {
+		var a = 20;
+		var b = 20;
+	}
+>>>>>>> 41f7cf49fe13277405843ddd37a00358fc970813
 				//0 = Gå. Varje rutas storlek är 85*85
 	var rutor = {0:"25 25", 1:"135 25", 2:"244 25", 3:"353 25", 4:"462 25", 5:"570 25", 6:"680 25", 7:"788 25", 
 				8:"897 25", 9:"897 135", 10:"897 244", 11:"897 354", 12:"897 463", 13:"897 571", 14:"897 680", 15:"897 789",
-				16:"897 897", 17:"788 898", 18:"680 898"}
+				16:"897 897", 17:"788 898", 18:"680 898", 19:"570 898", 20:"460 898", 21:"354 898", 22:"245 898", 23:"136 898", 
+				24:"28 898", 25:"28 789", 26:"28 680", 27:"28 571", 28:"28 463", 29:"28 354", 30:"28 244", 31:"28 135"};
+	var cool = rutor[nummer];
+	console.log(parseInt(cool.substring(0,cool.indexOf(" "))));
+	console.log(parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))));
+	context.beginPath();	
+	context.arc(canvas.width / 2 - 200 + a + (canvas.width / 2 * 0.001) * parseInt(cool.substring(0,cool.indexOf(" "))), 
+										b + (canvas.width / 2 * 0.001) * parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))), 
+										5,0,2*Math.PI); 
+	context.closePath();
+	context.fill();
+}
+function ritaOm() {
 	
+<<<<<<< HEAD
 	}
+=======
+}
+>>>>>>> 41f7cf49fe13277405843ddd37a00358fc970813
