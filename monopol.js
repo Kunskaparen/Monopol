@@ -13,8 +13,8 @@ window.onload = function init() {
 	planBild.width = 600; //Ändra planens storlek här
 	planBild.height = 600; // Och här
 	planBild.onload = function() {
-		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-	
+//context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
+	ritaOm();
 	
 	};
 };
@@ -70,10 +70,6 @@ function die() {
 		
 	}
 }
-<<<<<<< HEAD
-function ritaPjäs(ruta) {
-=======
-
 function ritaPjäs(nummer, pjäs) {
 	if (pjäs === 1) {
 		var a = 10;
@@ -91,7 +87,6 @@ function ritaPjäs(nummer, pjäs) {
 		var a = 20;
 		var b = 20;
 	}
->>>>>>> 41f7cf49fe13277405843ddd37a00358fc970813
 				//0 = Gå. Varje rutas storlek är 85*85
 	var rutor = {0:"25 25", 1:"135 25", 2:"244 25", 3:"353 25", 4:"462 25", 5:"570 25", 6:"680 25", 7:"788 25", 
 				8:"897 25", 9:"897 135", 10:"897 244", 11:"897 354", 12:"897 463", 13:"897 571", 14:"897 680", 15:"897 789",
@@ -108,9 +103,5 @@ function ritaPjäs(nummer, pjäs) {
 	context.fill();
 }
 function ritaOm() {
-	
-<<<<<<< HEAD
-	}
-=======
+	context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
 }
->>>>>>> 41f7cf49fe13277405843ddd37a00358fc970813
