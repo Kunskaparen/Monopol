@@ -8,7 +8,7 @@ window.onload = function init() {
 	canvas.height = window.innerHeight;
 	document.getElementById("farsa").appendChild(canvas);
 	context = document.getElementById("spelPlan").getContext("2d");
-	var planBild = new Image();
+	planBild = new Image();
 	planBild.src = "Monopol.png";
 	planBild.width = 600; //Ändra planens storlek här
 	planBild.height = 600; // Och här
@@ -71,21 +71,22 @@ function die() {
 	}
 }
 function ritaPjäs(nummer, pjäs) {
+	var avstånd = 0.03;
 	if (pjäs === 1) {
-		var a = 10;
-		var b = 10;
+		var a = planBild.width * avstånd;
+		var b = planBild.width * avstånd;
 	}
 	if (pjäs === 2) {
-		var a = 20;
-		var b = 10;
+		var a = planBild.width * avstånd * 2;
+		var b = planBild.width * avstånd;
 	}
 	if (pjäs === 3) {
-		var a = 10;
-		var b = 20;
+		var a = planBild.width * avstånd;
+		var b = planBild.width * avstånd * 2;
 	}
 	if (pjäs === 4) {
-		var a = 20;
-		var b = 20;
+		var a = planBild.width * avstånd * 2;
+		var b = planBild.width * avstånd * 2;
 	}
 				//0 = Gå. Varje rutas storlek är 85*85
 	var rutor = {0:"25 25", 1:"135 25", 2:"244 25", 3:"353 25", 4:"462 25", 5:"570 25", 6:"680 25", 7:"788 25", 
@@ -93,12 +94,16 @@ function ritaPjäs(nummer, pjäs) {
 				16:"897 897", 17:"788 898", 18:"680 898", 19:"570 898", 20:"460 898", 21:"354 898", 22:"245 898", 23:"136 898", 
 				24:"28 898", 25:"28 789", 26:"28 680", 27:"28 571", 28:"28 463", 29:"28 354", 30:"28 244", 31:"28 135"};
 	var cool = rutor[nummer];
-	console.log(parseInt(cool.substring(0,cool.indexOf(" "))));
-	console.log(parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))));
-	context.beginPath();	
-	context.arc(canvas.width / 2 - 200 + a + (canvas.width / 2 * 0.001) * parseInt(cool.substring(0,cool.indexOf(" "))), 
-										b + (canvas.width / 2 * 0.001) * parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))), 
-										5,0,2*Math.PI); 
+	console.log(parseInt(cool.substring(0,cool.indexOf(" ")))); //Printar x-koordinat
+	console.log(parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length)))); //Printar y-koordinat
+	
+	// Rita ut pjäs
+	context.beginPath();//Till kanten på planen		en bit in		förhållande				koordinat enligt paintbild 1000*1000
+	context.arc(canvas.width / 2 - planBild.width / 2 + a + (planBild.width * 0.001) * parseInt(cool.substring(0,cool.indexOf(" "))), // X-koordinat
+										b + (planBild.width * 0.001) * parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))), // Y-koordinat
+										5, // Pjässtorlek
+										0, // Rör ej
+										2*Math.PI); // Rör ej
 	context.closePath();
 	context.fill();
 }
