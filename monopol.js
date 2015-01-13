@@ -29,11 +29,40 @@ function die() {
 		}
 	}
 	console.log(results);
+	var etta = new Image();
+	var tvåa = new Image();
+	var trea = new Image();
+	var fyra = new Image();
+	var femma = new Image();
+	var sexa = new Image();
+	etta.src = "etta.png"
+	tvåa.src = "tvåa.png"
+	trea.src = "trea.png"
+	fyra.src = "fyra.png"
+	femma.src = "femma.png"
+	sexa.src = "sexa.png"
 	for (item in results){
-		console.log("HEJ")
+		if (item === 1){
+			context.drawImage("etta.png");
+		}
+		else if (item === 2){
+			context.drawImage("tvåa.png");
+		}
+		else if (item === 3){
+			context.drawImage("trea.png");
+		}
+		else if (item === 4){
+			context.drawImage("fyra.png");
+		}
+		else if (item === 5){
+			context.drawImage("femma.png");
+		}
+		else if (item === 6){
+			context.drawImage("sexa.png");
+		}
+		
 	}
 }
-
 function ritaPjäs(ruta) {
 				//0 = Gå. Varje rutas storlek är 85*85
 	var rutor = {0:"25 25", 1: }
