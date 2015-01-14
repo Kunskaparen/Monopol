@@ -3,7 +3,7 @@ window.onload = function init() {
 	canvas = document.createElement("canvas");
 	canvas.setAttribute("id", "spelPlan");
 	//canvas.height = 400; 
-	//canvas.width = 400;  
+	//canvas.width = 400; 
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	document.getElementById("farsa").appendChild(canvas);
@@ -12,12 +12,71 @@ window.onload = function init() {
 	planBild.src = "Monopol.png";
 	planBild.width = 600; //Ändra planens storlek här
 	planBild.height = 600; // Och här
-	planBild.onload = function() {
-//context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
+	planBild.onload = function() { //Gör allt efter planen laddats
+	//context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
 	ritaOm();
+	antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
+	saldo = [];
+	for (i = 1; i <= antalSpelare; i++) {
+	saldo[i] = 30000;
+	}
 	
+	saldoPrint();
+	
+	for (k = 1; k <= antalSpelare; k++) {
+		window.setTimeout(ritaPjäs(0, k), 3000);
+	}
 	};
+	
+	
+
+
+	
+	//window.setTimeout(speletsGång(), 3000);	
 };
+
+function speletsGång() {
+	var gameOver = false;
+	while (!gameOver) {
+		//die()
+		if (confirm("Vill du överföra?")) {
+			överföring(prompt("Betalare"), prompt("Mottagare"), prompt("Summa"));
+		}
+		saldoPrint();
+	
+		for (k = 1; k <= antalSpelare; k++) {
+		ritaPjäs(0, k);
+		}
+	gameOver = true;
+	}
+}
+
+function saldoPrint() {
+	if (! document.getElementById("spelarSaldo")) {
+		spelarSaldo = document.createElement("p");
+		spelarSaldo.setAttribute("id", "spelarSaldo");
+		document.getElementById("farsa").appendChild(spelarSaldo);
+		document.getElementById("spelarSaldo").innerHTML("DE FUNGEEEERRRARRRRRRR");
+	}
+		
+	/*for (j = 1; j <= antalSpelare; j++) {
+		context.font = "20px Courier New";
+		context.fillText("Spelare " + j + " har " + saldo[j] + " paulingar" , 10, 50 * j);
+	}*/
+}
+
+function betala(spelare, summa) {
+	saldo[spelare] = saldo[spelare] - summa;
+}
+
+function fåBetalt(spelare, summa) {
+	saldo[spelare] = saldo[spelare] + summa;
+}
+
+function överföring(betalare, mottagare, summa) {
+	saldo[betalare] = saldo[betalare] - summa;
+	saldo[mottagare] = saldo[mottagare] + summa;
+}
 
 function die() {
 	antalRullningar = 20; //Hur många gånger tärningen rullar innan den stannar
@@ -47,8 +106,8 @@ function die() {
 	sexa.src = "sexa.png";
 	var tärningssidor = {1:etta, 2:tvåa, 3:trea, 4:fyra, 5:femma, 6:sexa};
 	for (var item in results){
-		item = results[item]
-		console.log(item)
+		item = results[item];
+		console.log(item);
 		if (item === 1){
 			context.drawImage("etta.png",canvas.width / 2 + planBild.width/2, 0);
 		}
@@ -73,20 +132,20 @@ function die() {
 function ritaPjäs(nummer, pjäs) {
 	var avstånd = 0.03;
 	if (pjäs === 1) {
-		var a = planBild.width * avstånd;
-		var b = planBild.width * avstånd;
+		 a = planBild.width * avstånd;
+		 b = planBild.width * avstånd;
 	}
 	if (pjäs === 2) {
-		var a = planBild.width * avstånd * 2;
-		var b = planBild.width * avstånd;
+		 a = planBild.width * avstånd * 2;
+		 b = planBild.width * avstånd;
 	}
 	if (pjäs === 3) {
-		var a = planBild.width * avstånd;
-		var b = planBild.width * avstånd * 2;
+		 a = planBild.width * avstånd;
+		 b = planBild.width * avstånd * 2;
 	}
 	if (pjäs === 4) {
-		var a = planBild.width * avstånd * 2;
-		var b = planBild.width * avstånd * 2;
+		 a = planBild.width * avstånd * 2;
+		 b = planBild.width * avstånd * 2;
 	}
 				//0 = Gå. Varje rutas storlek är 85*85
 	var rutor = {0:"25 25", 1:"135 25", 2:"244 25", 3:"353 25", 4:"462 25", 5:"570 25", 6:"680 25", 7:"788 25", 
@@ -107,6 +166,7 @@ function ritaPjäs(nummer, pjäs) {
 	context.closePath();
 	context.fill();
 }
+
 function ritaOm() {
 	context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-}
+};
