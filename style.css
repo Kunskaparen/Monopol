@@ -14,6 +14,20 @@ html, body{
 
 p {
 	z-index: 2;
-	position:absolute;
+	position:relative;
 }
 
+#spelarSaldo2 {
+	position:relative;
+	top:30px;
+}
+
+#spelarSaldo3 {
+	position:relative;
+	top:60px;
+}
+
+#spelarSaldo4 {
+	position:relative;
+	top:90px;
+}
