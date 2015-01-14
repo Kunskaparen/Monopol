@@ -30,8 +30,6 @@ window.onload = function init() {
 		}
 	};
 	
-	
-
 
 	
 	//window.setTimeout(speletsGång(), 3000);	
@@ -74,15 +72,30 @@ function saldoPrint() {
 }
 
 function betala(spelare, summa) {
+try{
 	saldo[spelare] = saldo[spelare] - summa;
+	if(saldo[spelare]<0){
+	throw "ERROR: lack of money";
+	}
+	}catch(Exception ex){
+	alert(ex);
+	}
 }
+
 
 function fåBetalt(spelare, summa) {
 	saldo[spelare] = saldo[spelare] + summa;
 }
 
 function överföring(betalare, mottagare, summa) {
+
 	saldo[betalare] = saldo[betalare] - summa;
+	if(saldo[betalare]<0){
+	throw "ERROR: lack of money";
+	}
+	}catch(Exception ex){
+	alert(ex);
+	}
 	saldo[mottagare] = saldo[mottagare] + summa;
 }
 
