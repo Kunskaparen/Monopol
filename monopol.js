@@ -53,10 +53,11 @@ function speletsGång() {
 
 function saldoPrint() {
 	if (! document.getElementById("spelarSaldo")) {
-		saldo = document.createElement("p");
-		saldo.setAttribute("id", "spelarSaldo");
-		document.getElementById("farsa").appendChild(saldo);
-		document.getElementById("spelarSaldo").innerHTML = "DE FUNGEEEERRRARRRRRRR";
+		spelarSaldo = document.createElement("p");
+		spelarSaldo.setAttribute("id", "spelarSaldo");
+		document.getElementById("farsa").appendChild(spelarSaldo);
+		document.getElementById("spelarSaldo").innerHTML = "DE FUNGEEEERRRARRRRRRR"; 
+	    //Ogge, innerHTML är fan ingen funktion, det är ett attributes
 	}
 		
 	/*for (j = 1; j <= antalSpelare; j++) {
