@@ -14,18 +14,20 @@ window.onload = function init() {
 	planBild.height = 600; // Och här
 	planBild.onload = function() { //Gör allt efter planen laddats
 	//context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-	ritaOm();
-	antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
-	saldo = [];
-	for (i = 1; i <= antalSpelare; i++) {
-	saldo[i] = 30000;
-	}
 	
-	saldoPrint();
-	
-	for (k = 1; k <= antalSpelare; k++) {
-		window.setTimeout(ritaPjäs(0, k), 3000);
-	}
+		ritaOm();
+		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
+		saldo = [];
+		
+		for (var i = 1; i <= antalSpelare; i++) {
+			saldo[i] = 30000;
+		}
+		
+		saldoPrint();
+		
+		for (var k = 1; k <= antalSpelare; k++) {
+			window.setTimeout(ritaPjäs(0, k), 3000);
+		}
 	};
 	
 	
@@ -44,7 +46,7 @@ function speletsGång() {
 		}
 		saldoPrint();
 	
-		for (k = 1; k <= antalSpelare; k++) {
+		for (var k = 1; k <= antalSpelare; k++) {
 		ritaPjäs(0, k);
 		}
 	gameOver = true;
@@ -53,12 +55,17 @@ function speletsGång() {
 
 function saldoPrint() {
 	if (! document.getElementById("spelarSaldo")) {
-		spelarSaldo = document.createElement("p");
-		spelarSaldo.setAttribute("id", "spelarSaldo");
-		document.getElementById("farsa").appendChild(spelarSaldo);
-		document.getElementById("spelarSaldo").innerHTML = "DE FUNGEEEERRRARRRRRRR"; 
-	    //Ogge, innerHTML är fan ingen funktion, det är ett attributes
+		for (var i = 1; i <= antalSpelare; i++) {
+			spelarSaldo = document.createElement("p");
+			spelarSaldo.setAttribute("id", "spelarSaldo" + i);
+			document.getElementById("farsa").appendChild(spelarSaldo);
+		}
+		for (var i = 1; i <= antalSpelare; i++) {
+		document.getElementById("spelarSaldo" + i).innerHTML = "Spelare " + i + " har " + saldo[i] + " paulingar";
+		}
 	}
+		//Ogge, innerHTML är fan ingen funktion, det är ett attributes
+		//Henke, ett attribut, flera attributes
 		
 	/*for (j = 1; j <= antalSpelare; j++) {
 		context.font = "20px Courier New";
