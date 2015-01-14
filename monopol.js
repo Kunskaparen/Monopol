@@ -72,13 +72,14 @@ function saldoPrint() {
 }
 
 function betala(spelare, summa) {
-try{
-	saldo[spelare] = saldo[spelare] - summa;
-	if(saldo[spelare]<0){
-	throw "ERROR: lack of money";
+	try{
+		saldo[spelare] = saldo[spelare] - summa;
+		if(saldo[spelare]<0){
+		throw "ERROR: lack of money";
+		}
 	}
-	}catch(Exception ex){
-	alert(ex);
+	catch(ex){
+		alert(ex);
 	}
 }
 
@@ -88,13 +89,14 @@ function fåBetalt(spelare, summa) {
 }
 
 function överföring(betalare, mottagare, summa) {
-
-	saldo[betalare] = saldo[betalare] - summa;
-	if(saldo[betalare]<0){
-	throw "ERROR: lack of money";
+	try{
+		saldo[betalare] = saldo[betalare] - summa;
+		if(saldo[betalare]<0){
+		throw "ERROR: lack of money";
+		}
 	}
-	}catch(Exception ex){
-	alert(ex);
+	catch(ex){
+		alert(ex);
 	}
 	saldo[mottagare] = saldo[mottagare] + summa;
 }
