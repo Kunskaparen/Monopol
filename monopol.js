@@ -17,6 +17,10 @@ window.onload = function init() {
 	
 		ritaOm();
 		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
+		while (antalSpelare != 1 && antalSpelare != 2 && antalSpelare != 3 && antalSpelare != 4) {
+			antalSpelare = prompt("Felaktigt antal spelare. Hur många spelare?", "1, 2, 3 eller 4");
+		}
+		
 		saldo = [];
 		
 		for (var i = 1; i <= antalSpelare; i++) {
@@ -28,9 +32,11 @@ window.onload = function init() {
 		for (var k = 1; k <= antalSpelare; k++) {
 			window.setTimeout(ritaPjäs(0, k), 3000);
 		}
+		
+		slåTobbe();
 	};
 	
-
+	
 	
 	//window.setTimeout(speletsGång(), 3000);	
 };
@@ -69,6 +75,17 @@ function saldoPrint() {
 		context.font = "20px Courier New";
 		context.fillText("Spelare " + j + " har " + saldo[j] + " paulingar" , 10, 50 * j);
 	}*/
+}
+
+// skapar button-tagg samt en fin knapp
+function slåTobbe() {
+	slåKnapp = document.createElement("button");
+	slåKnapp.setAttribute("type", "button");
+	slåKnapp.setAttribute("id", "slåKnapp");
+	document.getElementById("farsa").appendChild(slåKnapp);
+	document.getElementById("slåKnapp").innerHTML = "Slå tärningen!";
+	//var bajs = antalSpelare * 30; //HENKE ADDA DIT TIX HÄR. JAG BRYR MIG INTE OM ATT VARA BRA PÅ BAJSSCRIPT.
+	//document.getElementById("slåKnapp").style.top = bajs.toString(); 
 }
 
 function betala(spelare, summa) {
