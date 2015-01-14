@@ -115,12 +115,12 @@ function die() {
 		}
 	}
 	console.log(results);
-	var etta = new Image();
-	var tvåa = new Image();
-	var trea = new Image();
-	var fyra = new Image();
-	var femma = new Image();
-	var sexa = new Image();
+	etta = new Image();
+	tvåa = new Image();
+	trea = new Image();
+	fyra = new Image();
+	femma = new Image();
+	sexa = new Image();
 	etta.src = "etta.png";
 	tvåa.src = "tvåa.png";
 	trea.src = "trea.png";
@@ -132,22 +132,34 @@ function die() {
 		item = results[item];
 		console.log(item);
 		if (item === 1){
-			context.drawImage("etta.png",canvas.width / 2 + planBild.width/2, 0);
+			etta.onload = function() {
+				context.drawImage(etta, canvas.width / 2 + planBild.width/2+10, 0);
+			}
 		}
 		else if (item === 2){
-			context.drawImage("tvåa.png",canvas.width / 2 + planBild.width/2, 0);
+			tvåa.onload = function() {
+				context.drawImage(tvåa,canvas.width / 2 + planBild.width/2+10, 0);
+			}
 		}
 		else if (item === 3){
-			context.drawImage("trea.png",canvas.width / 2 + planBild.width/2, 0);
+			trea.onload = function() {
+				context.drawImage(trea,canvas.width / 2 + planBild.width/2+10, 0);
+			}
 		}
 		else if (item === 4){
-			context.drawImage("fyra.png",canvas.width / 2 + planBild.width/2, 0);
+			fyra.onload = function() {
+				context.drawImage(fyra,canvas.width / 2 + planBild.width/2+10, 0);
+			}
 		}
 		else if (item === 5){
-			context.drawImage("femma.png",canvas.width / 2 + planBild.width/2, 0);
+			femma.onload = function() {
+				context.drawImage(femma,canvas.width / 2 + planBild.width/2+10, 0);
+			}
 		}
 		else if (item === 6){
-			context.drawImage("sexa.png",canvas.width / 2 + planBild.width/2, 0);
+			sexa.onload = function() {
+				context.drawImage(sexa,canvas.width / 2 + planBild.width/2+10, 0);
+			}
 		}
 		
 	}
