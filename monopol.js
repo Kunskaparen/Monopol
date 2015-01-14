@@ -23,7 +23,7 @@ window.onload = function init() {
 	
 	saldoPrint();
 	
-	for (k = 1; k <= antalSpelare; k++) {
+	for (var k = 1; k <= antalSpelare; k++) {
 		window.setTimeout(ritaPjäs(0, k), 3000);
 	}
 	};
@@ -44,7 +44,7 @@ function speletsGång() {
 		}
 		saldoPrint();
 	
-		for (k = 1; k <= antalSpelare; k++) {
+		for (var k = 1; k <= antalSpelare; k++) {
 		ritaPjäs(0, k);
 		}
 	gameOver = true;
