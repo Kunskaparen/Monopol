@@ -57,6 +57,10 @@ function speletsGång() {
 	}
 }
 
+function flyttaPjäs(currentLocation, tärningsSlag) {
+	
+}
+
 function saldoPrint() {
 	if (! document.getElementById("spelarSaldo")) {
 		for (var i = 1; i <= antalSpelare; i++) {
@@ -85,7 +89,8 @@ function slåTobbe() {
 	slåKnapp.setAttribute("id", "slåKnapp");
 	document.getElementById("farsa").appendChild(slåKnapp);
 	document.getElementById("slåKnapp").innerHTML = "Slå tärningen!";
-	document.getElementById("slåKnapp").style.top = String(30*antalSpelare)+"px" 
+	document.getElementById("slåKnapp").style.top = String(30*antalSpelare)+"px";
+	document.getElementById("slåKnapp").addEventListener("click", die);
 	//var bajs = antalSpelare * 30; //HENKE ADDA DIT TIX HÄR. JAG BRYR MIG INTE OM ATT VARA BRA PÅ BAJSSCRIPT.
 	//document.getElementById("slåKnapp").style.top = bajs.toString(); 
 }
