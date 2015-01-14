@@ -79,11 +79,13 @@ function saldoPrint() {
 
 // skapar button-tagg samt en fin knapp
 function slåTobbe() {
+	//Gör en knapp som kallar tärningen
 	slåKnapp = document.createElement("button");
 	slåKnapp.setAttribute("type", "button");
 	slåKnapp.setAttribute("id", "slåKnapp");
 	document.getElementById("farsa").appendChild(slåKnapp);
 	document.getElementById("slåKnapp").innerHTML = "Slå tärningen!";
+	document.getElementById("slåKnapp").style.top = String(30*antalSpelare)+"px" 
 	//var bajs = antalSpelare * 30; //HENKE ADDA DIT TIX HÄR. JAG BRYR MIG INTE OM ATT VARA BRA PÅ BAJSSCRIPT.
 	//document.getElementById("slåKnapp").style.top = bajs.toString(); 
 }
