@@ -147,39 +147,41 @@ function die() {
 	femma.src = "femma.png";
 	sexa.src = "sexa.png";
 	var tärningssidor = {1:etta, 2:tvåa, 3:trea, 4:fyra, 5:femma, 6:sexa};
-	for (var item in results){
-		item = results[item];
-		console.log(item);
-		if (item === 1){
-			etta.onload = function() {
-				context.drawImage(etta, canvas.width / 2 + planBild.width/2+10, 0);
+	for (var i = 0;i <= results.length;i++){
+		setTimeout(function(){
+			slag = results[i];
+			console.log(slag);
+			if (slag === 1){
+				etta.onload = function() {
+					context.drawImage(etta, canvas.width / 2 + planBild.width/2+10, 0);
+				}
 			}
-		}
-		else if (item === 2){
-			tvåa.onload = function() {
-				context.drawImage(tvåa,canvas.width / 2 + planBild.width/2+10, 0);
+			else if (slag === 2){
+				tvåa.onload = function() {
+					context.drawImage(tvåa,canvas.width / 2 + planBild.width/2+10, 0);
+				}
 			}
-		}
-		else if (item === 3){
-			trea.onload = function() {
-				context.drawImage(trea,canvas.width / 2 + planBild.width/2+10, 0);
+			else if (slag === 3){
+				trea.onload = function() {
+					context.drawImage(trea,canvas.width / 2 + planBild.width/2+10, 0);
+				}
 			}
-		}
-		else if (item === 4){
-			fyra.onload = function() {
-				context.drawImage(fyra,canvas.width / 2 + planBild.width/2+10, 0);
+			else if (slag === 4){
+				fyra.onload = function() {
+					context.drawImage(fyra,canvas.width / 2 + planBild.width/2+10, 0);
+				}
 			}
-		}
-		else if (item === 5){
-			femma.onload = function() {
-				context.drawImage(femma,canvas.width / 2 + planBild.width/2+10, 0);
+			else if (slag === 5){
+				femma.onload = function() {
+					context.drawImage(femma,canvas.width / 2 + planBild.width/2+10, 0);
+				}
 			}
-		}
-		else if (item === 6){
-			sexa.onload = function() {
-				context.drawImage(sexa,canvas.width / 2 + planBild.width/2+10, 0);
+			else if (slag === 6){
+				sexa.onload = function() {
+					context.drawImage(sexa,canvas.width / 2 + planBild.width/2+10, 0);
+				}
 			}
-		}
+		}, 2000)
 		
 	}
 }
