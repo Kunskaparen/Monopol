@@ -152,7 +152,7 @@ function die() {
 	femma.src = "femma.png";
 	sexa.src = "sexa.png";
 	var tärningssidor = {1:etta, 2:tvåa, 3:trea, 4:fyra, 5:femma, 6:sexa};
-	for (var i = 0;i <= results.length;i++){
+	(function slåTärning(i) {
 		setTimeout(function(){
 			slag = results[i];
 			console.log(slag);
@@ -186,9 +186,11 @@ function die() {
 					context.drawImage(sexa,canvas.width / 2 + planBild.width/2+10, 0);
 				}
 			}
+			if (--i) {
+				slåTärning(i)
+			}
 		}, 2000)
-		
-	}
+	}(antalRullningar))
 }
 function ritaPjäs(nummer, pjäs) {
 	var avstånd = 0.03;
