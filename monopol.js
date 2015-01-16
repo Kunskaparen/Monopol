@@ -14,32 +14,46 @@ window.onload = function init() {
 	planBild.height = 600; // Och här
 	planBild.onload = function() { //Gör allt efter planen laddats
 	//context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-	
-		ritaOm();
+		
+		
+		
+		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
+		
 		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
 		while (antalSpelare != 1 && antalSpelare != 2 && antalSpelare != 3 && antalSpelare != 4) {
 			antalSpelare = prompt("Felaktigt antal spelare. Hur många spelare?", "1, 2, 3 eller 4");
 		}
 		
-		saldo = [];
+		currentLocation = [];
+		for (var i = 1; i <= antalSpelare; i++) {
+			currentLocation[i] = 0;
+		}
 		
+		saldo = [];
 		for (var i = 1; i <= antalSpelare; i++) {
 			saldo[i] = 30000;
 		}
 		
+		playerTurn = 1;
+		
+		
 		saldoPrint();
-		
-		for (var k = 1; k <= antalSpelare; k++) {
-			window.setTimeout(ritaPjäs(0, k), 3000);
-		}
-		
 		slåTobbe();
+		ritaOm();
+		
+		
+		
 	};
 	
 	
 	
-	//window.setTimeout(speletsGång(), 3000);	
+	//window.setTimeout(speletsGång(), 3000);
 };
+
+function onButtonDown() {
+	flyttaPjäs(playerTurn, die());
+	ritaOm();
+}
 
 function speletsGång() {
 	var gameOver = false;
@@ -57,8 +71,14 @@ function speletsGång() {
 	}
 }
 
-function flyttaPjäs(currentLocation, tärningsSlag) {
-	
+function flyttaPjäs(spelare, tärningsSlag) {
+	console.log(tärningsSlag);
+	if (currentLocation[spelare] + tärningsSlag > 31) {
+		currentLocation[spelare] += tärningsSlag - 32;
+	}
+	else {
+		currentLocation[spelare] += tärningsSlag;
+	}
 }
 
 function saldoPrint() {
@@ -90,7 +110,7 @@ function slåTobbe() {
 	document.getElementById("farsa").appendChild(slåKnapp);
 	document.getElementById("slåKnapp").innerHTML = "Slå tärningen!";
 	document.getElementById("slåKnapp").style.top = String(30*antalSpelare)+"px";
-	document.getElementById("slåKnapp").addEventListener("click", die);
+	document.getElementById("slåKnapp").addEventListener("click", onButtonDown);
 	//var bajs = antalSpelare * 30; //HENKE ADDA DIT TIX HÄR. JAG BRYR MIG INTE OM ATT VARA BRA PÅ BAJSSCRIPT.
 	//document.getElementById("slåKnapp").style.top = bajs.toString(); 
 }
@@ -175,43 +195,61 @@ function die() {
 					context.drawImage(sexa,canvas.width / 2 + planBild.width/2+10, 0);
 			}
 			if (--i) {
-				slåTärning(i)
+				slåTärning(i);
 			}
 		}, 300)
 	}(antalRullningar))
+	console.log("Returnar: " + results[1] + " när i = " + i);
+	return results[1];
 }
-function ritaPjäs(nummer, pjäs) {
+function ritaPjäs(pjäs) {
 	var avstånd = 0.03;
 	if (pjäs === 1) {
 		 a = planBild.width * avstånd;
 		 b = planBild.width * avstånd;
+		 color = "#008744";
 	}
 	if (pjäs === 2) {
 		 a = planBild.width * avstånd * 2;
 		 b = planBild.width * avstånd;
+		 color = "#0057e7";
 	}
 	if (pjäs === 3) {
 		 a = planBild.width * avstånd;
 		 b = planBild.width * avstånd * 2;
+		 color = "#d62d20";
 	}
 	if (pjäs === 4) {
 		 a = planBild.width * avstånd * 2;
 		 b = planBild.width * avstånd * 2;
+		 color = "#ffa700";
 	}
+	
+	
 				//0 = Gå. Varje rutas storlek är 85*85
 	var rutor = {0:"25 25", 1:"135 25", 2:"244 25", 3:"353 25", 4:"462 25", 5:"570 25", 6:"680 25", 7:"788 25", 
 				8:"897 25", 9:"897 135", 10:"897 244", 11:"897 354", 12:"897 463", 13:"897 571", 14:"897 680", 15:"897 789",
 				16:"897 897", 17:"788 898", 18:"680 898", 19:"570 898", 20:"460 898", 21:"354 898", 22:"245 898", 23:"136 898", 
 				24:"28 898", 25:"28 789", 26:"28 680", 27:"28 571", 28:"28 463", 29:"28 354", 30:"28 244", 31:"28 135"};
-	var cool = rutor[nummer];
+	console.log(currentLocation[1]);
+	console.log(currentLocation[2]);
+	console.log(currentLocation[3]);
+	console.log(currentLocation[4]);
+	var temp = currentLocation[pjäs];
+	console.log(temp);
+	var cool = rutor[temp];
+	console.log(rutor[temp]);
 	console.log(parseInt(cool.substring(0,cool.indexOf(" ")))); //Printar x-koordinat
 	console.log(parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length)))); //Printar y-koordinat
 	
 	// Rita ut pjäs
 	context.beginPath();//Till kanten på planen		en bit in		förhållande				koordinat enligt paintbild 1000*1000
+	
+	
+	context.fillStyle = color;
 	context.arc(canvas.width / 2 - planBild.width / 2 + a + (planBild.width * 0.001) * parseInt(cool.substring(0,cool.indexOf(" "))), // X-koordinat
 										b + (planBild.width * 0.001) * parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))), // Y-koordinat
-										5, // Pjässtorlek
+										8, // Pjässtorlek
 										0, // Rör ej
 										2*Math.PI); // Rör ej
 	context.closePath();
@@ -220,4 +258,7 @@ function ritaPjäs(nummer, pjäs) {
 
 function ritaOm() {
 	context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
+	for (var k = 1; k <= antalSpelare; k++) {
+		ritaPjäs(k);
+	}
 };
