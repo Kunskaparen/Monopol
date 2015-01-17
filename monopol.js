@@ -42,7 +42,6 @@ window.onload = function init() {
 		ritaOm();
 		
 		
-		
 	};
 	
 	
@@ -61,25 +60,43 @@ function onButtonDown() {
 				if (i !== 0) {
 					gåEttStegITagetTix(i);
 				}
+				else {
+					speletsGång();	//speletsGång körs när slag och förflyttning är klart.
+				}
 			}, 300)
 		}
-		gåEttStegITagetTix(flyttningar);
+		gåEttStegITagetTix(flyttningar);	
 	}, 7000)
 }
 
+
 function speletsGång() {
-	var gameOver = false;
-	while (!gameOver) {
-		//die()
-		if (confirm("Vill du överföra?")) {
-			överföring(prompt("Betalare"), prompt("Mottagare"), prompt("Summa"));
+	setTimeout(function(){
+		var gameOver = false;
+		while (!gameOver) {
+			//die()
+			if (confirm("Vill du överföra?")) {
+				överföring(prompt("Betalare"), prompt("Mottagare"), prompt("Summa"));
+			}
+			saldoPrint();
+		
+			for (var k = 1; k <= antalSpelare; k++) {
+				ritaPjäs(k);
+			}
+			console.log("Spelare " + playerTurn + "'s tur");
+			nextPlayer();
+			console.log("Spelare " + playerTurn + "'s tur");
+		gameOver = true;
 		}
-		saldoPrint();
-	
-		for (var k = 1; k <= antalSpelare; k++) {
-		ritaPjäs(0, k);
-		}
-	gameOver = true;
+	}, 500)
+}
+
+function nextPlayer() {
+	if (playerTurn !== antalSpelare) {
+		playerTurn = playerTurn + 1;
+	}
+	else {
+		playerTurn = 1;
 	}
 }
 
