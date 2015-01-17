@@ -172,7 +172,7 @@ function die() {
 	femma.src = "femma.png";
 	sexa.src = "sexa.png";
 	var tärningssidor = {1:etta, 2:tvåa, 3:trea, 4:fyra, 5:femma, 6:sexa};
-	(function slåTärning(i) {
+	function slåTärning(i) {
 		setTimeout(function(){
 			slag = results[i];
 			console.log(slag);
@@ -198,7 +198,8 @@ function die() {
 				slåTärning(i);
 			}
 		}, 300)
-	}(antalRullningar))
+	}
+	slåTärning(antalRullningar)
 	console.log("Returnar: " + results[1] + " när i = " + i);
 	return results[1];
 }
