@@ -2,8 +2,8 @@
 window.onload = function init() {
 	canvas = document.createElement("canvas");
 	canvas.setAttribute("id", "spelPlan");
-	//canvas.height = 400; 
-	//canvas.width = 400; 
+	//canvas.height = 400;
+	//canvas.width = 400;
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	document.getElementById("farsa").appendChild(canvas);
@@ -51,8 +51,20 @@ window.onload = function init() {
 };
 
 function onButtonDown() {
-	flyttaPjäs(playerTurn, die());
-	ritaOm();
+	var flyttningar = die();
+	setTimeout(function(){
+		function gåEttStegITagetTix(i) {
+			setTimeout(function(){
+				flyttaPjäs(playerTurn, 1);
+				ritaOm();
+				i = i - 1;
+				if (i !== 0) {
+					gåEttStegITagetTix(i);
+				}
+			}, 300)
+		}
+		gåEttStegITagetTix(flyttningar);
+	}, 7000)
 }
 
 function speletsGång() {
@@ -232,20 +244,11 @@ function ritaPjäs(pjäs) {
 				8:"897 25", 9:"897 135", 10:"897 244", 11:"897 354", 12:"897 463", 13:"897 571", 14:"897 680", 15:"897 789",
 				16:"897 897", 17:"788 898", 18:"680 898", 19:"570 898", 20:"460 898", 21:"354 898", 22:"245 898", 23:"136 898", 
 				24:"28 898", 25:"28 789", 26:"28 680", 27:"28 571", 28:"28 463", 29:"28 354", 30:"28 244", 31:"28 135"};
-	console.log(currentLocation[1]);
-	console.log(currentLocation[2]);
-	console.log(currentLocation[3]);
-	console.log(currentLocation[4]);
-	var temp = currentLocation[pjäs];
-	console.log(temp);
-	var cool = rutor[temp];
-	console.log(rutor[temp]);
-	console.log(parseInt(cool.substring(0,cool.indexOf(" ")))); //Printar x-koordinat
-	console.log(parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length)))); //Printar y-koordinat
+	
+	var cool = rutor[currentLocation[pjäs]];
 	
 	// Rita ut pjäs
 	context.beginPath();//Till kanten på planen		en bit in		förhållande				koordinat enligt paintbild 1000*1000
-	
 	
 	context.fillStyle = color;
 	context.arc(canvas.width / 2 - planBild.width / 2 + a + (planBild.width * 0.001) * parseInt(cool.substring(0,cool.indexOf(" "))), // X-koordinat
