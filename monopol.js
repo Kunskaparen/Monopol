@@ -83,6 +83,7 @@ function speletsGång() {
 			for (var k = 1; k <= antalSpelare; k++) {
 				ritaPjäs(k);
 			}
+			console.log("antalSpelare = " + antalSpelare);
 			console.log("Spelare " + playerTurn + "'s tur");
 			nextPlayer();
 			console.log("Spelare " + playerTurn + "'s tur");
@@ -92,7 +93,7 @@ function speletsGång() {
 }
 
 function nextPlayer() {
-	if (playerTurn !== antalSpelare) {
+	if (playerTurn !== parseInt(antalSpelare)) {
 		playerTurn = playerTurn + 1;
 	}
 	else {
