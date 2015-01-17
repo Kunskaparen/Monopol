@@ -57,7 +57,7 @@ function onButtonDown() {
 				flyttaPjäs(playerTurn, 1);
 				ritaOm();
 				i = i - 1;
-				if (i !== 0) {
+				if (not --i) {
 					gåEttStegITagetTix(i);
 				}
 				else {
