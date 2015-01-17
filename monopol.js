@@ -163,7 +163,7 @@ function fåBetalt(spelare, summa) {
 
 function överföring(betalare, mottagare, summa) {
 	try{
-		saldo[betalare] = saldo[betalare] - summa;
+		saldo[betalare] = parseInt(saldo[betalare]) - parseInt(summa);
 		if(saldo[betalare]<0){
 		throw "ERROR: lack of money";
 		}
@@ -171,7 +171,7 @@ function överföring(betalare, mottagare, summa) {
 	catch(ex){
 		alert(ex);
 	}
-	saldo[mottagare] = saldo[mottagare] + summa;
+	saldo[mottagare] = parseInt(saldo[mottagare]) + parseInt(summa);
 }
 
 function die() {
