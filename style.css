@@ -13,7 +13,7 @@
 }
 
 p {
-	z-index: 2;
+	z-index: 99;
 	position:relative;
 }
 
@@ -41,4 +41,14 @@ p {
 	color:white;
 	height:60px;
 	width:150px;
+}
+
+#överförText {
+	position:absolute;
+	left:270px;
+}
+
+#överförSumma {
+	position:absolute;
+	left:270px;
 }
