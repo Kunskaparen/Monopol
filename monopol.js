@@ -49,6 +49,14 @@ window.onload = function init() {
 	//window.setTimeout(speletsGång(), 3000);
 };
 
+//HERE BE SPELARKLASS
+function Spelare(HereBeArgs) {
+	this.position = 0;
+	this.saldo = 30000;
+	//färg om man vill ändra
+	
+}
+
 function onButtonDown() {
 	var flyttningar = die();
 	setTimeout(function(){
