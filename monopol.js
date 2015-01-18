@@ -212,7 +212,6 @@ function die() {
 	function slåTärning(i) {
 		setTimeout(function(){
 			slag = results[i];
-			console.log(slag);
 			if (slag === 1){
 					context.drawImage(etta, canvas.width / 2 + planBild.width/2+10, 0);
 			}
