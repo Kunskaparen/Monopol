@@ -13,10 +13,6 @@ window.onload = function init() {
 	planBild.width = 600; //Ändra planens storlek här
 	planBild.height = 600; // Och här
 	planBild.onload = function() { //Gör allt efter planen laddats
-	//context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-		
-		
-		
 		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
 		
 		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
