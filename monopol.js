@@ -73,7 +73,7 @@ function onButtonDown() {
 				}
 			}, 300)
 		}
-		gåEttStegITagetTix(flyttningar);	
+		gåEttStegITagetTix(flyttningar);
 	}, 7000)
 }
 
