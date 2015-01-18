@@ -31,8 +31,20 @@ window.onload = function init() {
 		}
 		
 		playerTurn = 1;
-		
-		
+		(function ritaUtÖverför() {
+		överförSumma = document.createElement("input");
+		överförCheck = document.createElement("input");
+		överförGivare = document.createElement("input");
+		överförTagare = document.createElement("input");
+		överförSumma.setAttribute("id", "överförSumma");
+		överförCheck.setAttribute("id", "överförCheck");
+		överförGivare.setAttribute("id", "överförGivare");
+		överförTagare.setAttribute("id", "överförTagare");
+		document.getElementById("farsa").appendChild(överförSumma);
+		document.getElementById("farsa").appendChild(överförCheck);
+		document.getElementById("farsa").appendChild(överförGivare);
+		document.getElementById("farsa").appendChild(överförTagare);
+		}())
 		saldoPrint();
 		slåTobbe();
 		ritaOm();
