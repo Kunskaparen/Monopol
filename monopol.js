@@ -13,10 +13,6 @@ window.onload = function init() {
 	planBild.width = 600; //Ändra planens storlek här
 	planBild.height = 600; // Och här
 	planBild.onload = function() { //Gör allt efter planen laddats
-	//context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-		
-		
-		
 		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
 		
 		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
@@ -120,23 +116,17 @@ function flyttaPjäs(spelare, tärningsSlag) {
 }
 
 function saldoPrint() {
-	if (! document.getElementById("spelarSaldo")) {
+	if (document.getElementById("spelarSaldo1") === null){
 		for (var i = 1; i <= antalSpelare; i++) {
 			spelarSaldo = document.createElement("p");
 			spelarSaldo.setAttribute("id", "spelarSaldo" + i);
 			document.getElementById("farsa").appendChild(spelarSaldo);
 		}
-		for (var i = 1; i <= antalSpelare; i++) {
-		document.getElementById("spelarSaldo" + i).innerHTML = "Spelare " + i + " har " + saldo[i] + " paulingar";
-		}
+	}
+	for (var i = 1; i <= antalSpelare; i++) {
+	document.getElementById("spelarSaldo" + i).innerHTML = "Spelare " + i + " har " + saldo[i] + " paulingar";
 	}
 		//Ogge, innerHTML är fan ingen funktion, det är ett attributes
-		//Henke, ett attribut, flera attributes
-		
-	/*for (j = 1; j <= antalSpelare; j++) {
-		context.font = "20px Courier New";
-		context.fillText("Spelare " + j + " har " + saldo[j] + " paulingar" , 10, 50 * j);
-	}*/
 }
 
 // skapar button-tagg samt en fin knapp
