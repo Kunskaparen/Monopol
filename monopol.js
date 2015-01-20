@@ -57,6 +57,15 @@ window.onload = function init() {
 	//window.setTimeout(speletsGång(), 3000);
 };
 
+//HERE BE GATA
+function GatJävel(namn, pris, index) {
+	this.namn = namn;
+	this.pris = pris;
+	this.index = index
+}
+
+a514 = new Gatjävel("Biologin", 500, 1);
+
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
 	this.position = 0;
