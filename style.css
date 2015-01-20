@@ -12,6 +12,13 @@
 	position:absolute;
 }
 
+#gatFarsa {
+	position:absolute;
+	top:170px;
+}
+
+
+
 p {
 	z-index: 99;
 	position:relative;

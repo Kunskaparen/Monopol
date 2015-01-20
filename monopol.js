@@ -14,12 +14,22 @@ window.onload = function init() {
 	planBild.height = 600; // Och här
 	planBild.onload = function() { //Gör allt efter planen laddats
 		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-		
+		context.rect(canvas.width / 2 + planBild.width/2+10, 150,300,150); //De två sista värdena ska vara sizen av rektanglen
+		context.stroke();
 		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
 		while (antalSpelare != 1 && antalSpelare != 2 && antalSpelare != 3 && antalSpelare != 4) {
 			antalSpelare = prompt("Felaktigt antal spelare. Hur många spelare?", "1, 2, 3 eller 4");
 		}
-		
+		document.getElementById("gatFarsa").style.left=String(canvas.width / 2 + planBild.width/2+30)+"px";
+		gatNamn = document.createElement("h3");
+		gatPris = document.createElement("p");
+		gatÄgare = document.createElement("p");
+		gatNamn.setAttribute("id", "gatNamn");
+		gatPris.setAttribute("id", "gatPris");
+		gatÄgare.setAttribute("id", "gatÄgare");
+		document.getElementById("gatFarsa").appendChild(gatNamn);
+		document.getElementById("gatFarsa").appendChild(gatPris);
+		document.getElementById("gatFarsa").appendChild(gatÄgare);
 		currentLocation = [];
 		for (var i = 1; i <= antalSpelare; i++) {
 			currentLocation[i] = 0;
@@ -31,7 +41,7 @@ window.onload = function init() {
 		}
 		
 		playerTurn = 1;
-		(function ritaUtÖverför() {
+		/*(function ritaUtÖverför() {
 		överförSumma = document.createElement("input");
 		överförCheck = document.createElement("input");
 		överförGivare = document.createElement("input");
@@ -44,7 +54,7 @@ window.onload = function init() {
 		document.getElementById("farsa").appendChild(överförCheck);
 		document.getElementById("farsa").appendChild(överförGivare);
 		document.getElementById("farsa").appendChild(överförTagare);
-		}())
+		}())*/
 		saldoPrint();
 		slåTobbe();
 		ritaOm();
@@ -57,12 +67,45 @@ window.onload = function init() {
 	//window.setTimeout(speletsGång(), 3000);
 };
 
+//HERE BE GATA
+function GatJävel(namn, pris, index) {
+	this.namn = namn;
+	this.pris = pris;
+	this.index = index;
+}
+allaGator = []
+västerlånggatan = new GatJävel("Ekonomigatan", 1000, 1);
+horn = new GatJävel("Webbutvecklingssalen", 1000, 2);
+c = new GatJävel("Franskan", 2000, 5);
+d = new GatJävel("Husseins håla", 2000, 6);
+e = new GatJävel("Svenskan", 2000, 7);
+abc = new GatJävel("Disneyföreningen", 2500, 9);
+f = new GatJävel("Programmeringsgrottan", 2500, 10);
+g = new GatJävel("Biologin")
+/*h;
+i;
+j;
+k;
+l;*/
+allaGator.push(västerlånggatan,horn,c,d,e,abc,f,g)
+
+
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
 	this.position = 0;
 	this.saldo = 30000;
 	//färg om man vill ändra
 	
+}
+
+function ritaGata(){
+	for (var i = 0; i < 7;i++){
+		nuGata = allaGator[i]
+		if (nuGata.index === currentLocation[playerTurn]){
+			gatNamn.innerHTML = nuGata.namn
+			gatPris.innerHTML = nuGata.pris
+		}
+	}
 }
 
 function onButtonDown() {
@@ -79,22 +122,29 @@ function onButtonDown() {
 				else {
 					speletsGång();	//speletsGång körs när slag och förflyttning är klart.
 				}
+			/*ritaGata();*/
 			}, 300)
 		}
 		gåEttStegITagetTix(flyttningar);
 	}, 7000)
+	
 }
 
-
+function ärGatanSåld(){
+		if typeOf(allaGator[currentLocation[playerTurn]].ägare) == 
+}
 function speletsGång() {
 	setTimeout(function(){
 		var gameOver = false;
 		while (!gameOver) {
+			/*Kör en listlookup som kollar aktiv spelares ruta och ritar ut motsvarande gata*/
 			//die()
-			if (confirm("Vill du överföra?")) {
+			setTimeout(ritaGata(),5);
+			/*if (confirm("Vill du överföra?")) {
 				överföring(prompt("Betalare"), prompt("Mottagare"), prompt("Summa"));
 			}
 			saldoPrint();
+			*/
 		
 			for (var k = 1; k <= antalSpelare; k++) {
 				ritaPjäs(k);
@@ -155,17 +205,14 @@ function slåTobbe() {
 	//document.getElementById("slåKnapp").style.top = bajs.toString(); 
 }
 
-function betala(spelare, summa) {
-	try{
-		saldo[spelare] = saldo[spelare] - summa;
-		if(saldo[spelare]<0){
-		throw "ERROR: lack of money";
+/*function betala(spelare, summa) {
+		if(saldo[spelare]-summa<0){
+			alert("ERROR: lack of money");
 		}
-	}
-	catch(ex){
-		alert(ex);
-	}
-}
+		else {
+			saldo[spelare] = saldo[spelare] - summa;
+		}
+}*/
 
 
 function fåBetalt(spelare, summa) {
@@ -173,16 +220,13 @@ function fåBetalt(spelare, summa) {
 }
 
 function överföring(betalare, mottagare, summa) {
-	try{
+	if(saldo[betalare] - summa<0) {
+		alert("ERROR: lack of money");
+	}
+	else {
 		saldo[betalare] = parseInt(saldo[betalare]) - parseInt(summa);
-		if(saldo[betalare]<0){
-		throw "ERROR: lack of money";
-		}
-	}
-	catch(ex){
-		alert(ex);
-	}
 	saldo[mottagare] = parseInt(saldo[mottagare]) + parseInt(summa);
+	}
 }
 
 function die() {
