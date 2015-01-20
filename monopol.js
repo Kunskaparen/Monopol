@@ -14,7 +14,8 @@ window.onload = function init() {
 	planBild.height = 600; // Och här
 	planBild.onload = function() { //Gör allt efter planen laddats
 		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-		
+		context.rect(canvas.width / 2 + planBild.width/2+10, 150,150,150); //De två sista 150 ska vara sizen av rektanglen
+		context.stroke();
 		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
 		while (antalSpelare != 1 && antalSpelare != 2 && antalSpelare != 3 && antalSpelare != 4) {
 			antalSpelare = prompt("Felaktigt antal spelare. Hur många spelare?", "1, 2, 3 eller 4");
@@ -64,7 +65,7 @@ function GatJävel(namn, pris, index) {
 	this.index = index
 }
 
-a514 = new Gatjävel("Biologin", 500, 1);
+a514 = new GatJävel("Biologin", 500, 1);
 
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
