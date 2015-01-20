@@ -104,6 +104,9 @@ function ritaGata(){
 		if (nuGata.index === currentLocation[playerTurn]){
 			gatNamn.innerHTML = nuGata.namn
 			gatPris.innerHTML = nuGata.pris
+			if (typeof nuGata.ägare != "undefined") {
+				gatÄgare.innerHTML = "Ägare: " + String(nuGata.ägare)
+			}
 		}
 	}
 }
@@ -131,8 +134,32 @@ function onButtonDown() {
 	
 }
 
+function gatuKöp(){
+	if (ärGatanSåld()){
+		if (allaGator[currentLocation[playerTurn]].ägare == playerTurn){
+			console.log("Du äger gatan");
+		}
+	}
+	else {
+		if (confirm("Gatan är ledig/nVill du köpa den?")){
+			if (saldo[playerTurn] - parseInt(allaGator[currentLocation[playerTurn]].pris) >= 0){
+				allaGator[currentLocation[playerTurn]].ägare = playerTurn
+			}
+			else{
+				alert("En fattiglapp som du är sist innan du ens börjat/nDu har inte råd");
+			}
+		}
+	}
+	
+}
+
 function ärGatanSåld(){
-		if typeOf(allaGator[currentLocation[playerTurn]].ägare) == 
+		if (typeof allaGator[currentLocation[playerTurn]].ägare == "undefined"){
+			return true
+		}
+		else {
+			return false
+		}
 }
 function speletsGång() {
 	setTimeout(function(){
@@ -146,7 +173,7 @@ function speletsGång() {
 			}
 			saldoPrint();
 			*/
-		
+			gatuKöp()
 			for (var k = 1; k <= antalSpelare; k++) {
 				ritaPjäs(k);
 			}
