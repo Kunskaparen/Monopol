@@ -31,7 +31,7 @@ window.onload = function init() {
 		}
 		
 		playerTurn = 1;
-		(function ritaUtÖverför() {
+		/*(function ritaUtÖverför() {
 		överförSumma = document.createElement("input");
 		överförCheck = document.createElement("input");
 		överförGivare = document.createElement("input");
@@ -44,7 +44,7 @@ window.onload = function init() {
 		document.getElementById("farsa").appendChild(överförCheck);
 		document.getElementById("farsa").appendChild(överförGivare);
 		document.getElementById("farsa").appendChild(överförTagare);
-		}())
+		}())*/
 		saldoPrint();
 		slåTobbe();
 		ritaOm();
@@ -155,17 +155,14 @@ function slåTobbe() {
 	//document.getElementById("slåKnapp").style.top = bajs.toString(); 
 }
 
-function betala(spelare, summa) {
-	try{
-		saldo[spelare] = saldo[spelare] - summa;
-		if(saldo[spelare]<0){
-		throw "ERROR: lack of money";
+/*function betala(spelare, summa) {
+		if(saldo[spelare]-summa<0){
+			alert("ERROR: lack of money");
 		}
-	}
-	catch(ex){
-		alert(ex);
-	}
-}
+		else {
+			saldo[spelare] = saldo[spelare] - summa;
+		}
+}*/
 
 
 function fåBetalt(spelare, summa) {
@@ -173,16 +170,13 @@ function fåBetalt(spelare, summa) {
 }
 
 function överföring(betalare, mottagare, summa) {
-	try{
+	if(saldo[betalare] - summa<0) {
+		alert("ERROR: lack of money");
+	}
+	else {
 		saldo[betalare] = parseInt(saldo[betalare]) - parseInt(summa);
-		if(saldo[betalare]<0){
-		throw "ERROR: lack of money";
-		}
-	}
-	catch(ex){
-		alert(ex);
-	}
 	saldo[mottagare] = parseInt(saldo[mottagare]) + parseInt(summa);
+	}
 }
 
 function die() {
