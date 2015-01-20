@@ -62,10 +62,23 @@ window.onload = function init() {
 function GatJävel(namn, pris, index) {
 	this.namn = namn;
 	this.pris = pris;
-	this.index = index
+	this.index = index;
 }
 
-a514 = new GatJävel("Biologin", 500, 1);
+Västerlånggatan = new GatJävel("Ekonomigatan", 1000, 1);
+Horn = new GatJävel("Webbutvecklingssalen", 1000, 2);
+c = new GatJävel("Franskan", 2000, 5);
+d = new GatJävel("Husseins håla", 2000, 6);
+e = new GatJävel("Svenskan", 2000, 7);
+abc = new GatJävel("Disneyföreningen", 2500, 9);
+f = new GatJävel("Programmeringsgrottan", 2500, 10);
+g = new GatJävel("Biologin")
+h =
+i =
+j =
+k =
+l =
+
 
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
