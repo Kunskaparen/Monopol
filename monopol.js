@@ -14,13 +14,13 @@ window.onload = function init() {
 	planBild.height = 600; // Och här
 	planBild.onload = function() { //Gör allt efter planen laddats
 		context.drawImage(planBild, canvas.width / 2 - planBild.width/2, 0, planBild.width, planBild.height);
-		context.rect(canvas.width / 2 + planBild.width/2+10, 150,150,150); //De två sista 150 ska vara sizen av rektanglen
+		context.rect(canvas.width / 2 + planBild.width/2+10, 150,300,150); //De två sista 150 ska vara sizen av rektanglen
 		context.stroke();
 		antalSpelare = prompt("Hur många spelare?", "1, 2, 3 eller 4");
 		while (antalSpelare != 1 && antalSpelare != 2 && antalSpelare != 3 && antalSpelare != 4) {
 			antalSpelare = prompt("Felaktigt antal spelare. Hur många spelare?", "1, 2, 3 eller 4");
 		}
-		
+		document.getElementById("gatJävel").style.left=String(canvas.width / 2 + planBild.width/2+10)+"px";
 		currentLocation = [];
 		for (var i = 1; i <= antalSpelare; i++) {
 			currentLocation[i] = 0;
@@ -113,6 +113,7 @@ function speletsGång() {
 	setTimeout(function(){
 		var gameOver = false;
 		while (!gameOver) {
+			/*Kör en listlookup som kollar aktiv spelares ruta och ritar ut motsvarande gata*/
 			//die()
 			if (confirm("Vill du överföra?")) {
 				överföring(prompt("Betalare"), prompt("Mottagare"), prompt("Summa"));

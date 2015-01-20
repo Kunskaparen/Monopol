@@ -12,9 +12,12 @@
 	position:absolute;
 }
 
-#gatjävel {
-
+#gatJävel {
+	position:absolute;
+	top:170px;
 }
+
+
 
 p {
 	z-index: 99;
