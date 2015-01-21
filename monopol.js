@@ -153,9 +153,10 @@ function gatuKöp(){
 	}
 	else {
 		if (confirm("Gatan är ledig.\nVill du köpa den?")){
-			if (saldo[playerTurn] - parseInt(allaGator[currentLocation[playerTurn]].pris) >= 0){
-				saldo[playerTurn] -= parseInt(allaGator[currentLocation[playerTurn]].pris)
-				allaGator[currentLocation[playerTurn]].ägare = playerTurn;
+			if (saldo[playerTurn] - parseInt(allaGator[currentLocation[playerTurn]-1].pris) >= 0){
+				saldo[playerTurn] = saldo[playerTurn] - parseInt(allaGator[currentLocation[playerTurn]-1].pris)
+				allaGator[currentLocation[playerTurn]-1].ägare = playerTurn;
+				saldoPrint();
 			}
 			else{
 				alert("En fattiglapp som du är sist innan du ens börjat.\nDu har inte råd.");
