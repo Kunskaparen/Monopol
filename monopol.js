@@ -73,22 +73,29 @@ function GatJävel(namn, pris, index) {
 	this.pris = pris;
 	this.index = index;
 }
-allaGator = []
-västerlånggatan = new GatJävel("Ekonomigatan", 1000, 1);
-horn = new GatJävel("Webbutvecklingssalen", 1000, 2);
+allaGator = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v];
+a = new GatJävel("Ekonomigatan", 1000, 1);
+b = new GatJävel("Webbutvecklingssalen", 1000, 2);
 c = new GatJävel("Franskan", 2000, 5);
 d = new GatJävel("Husseins håla", 2000, 6);
 e = new GatJävel("Svenskan", 2000, 7);
-abc = new GatJävel("Disneyföreningen", 2500, 9);
-f = new GatJävel("Programmeringsgrottan", 2500, 10);
-g = new GatJävel("Biologin")
-/*h;
-i;
-j;
-k;
-l;*/
-allaGator.push(västerlånggatan,horn,c,d,e,abc,f,g)
-
+f = new GatJävel("Disneyföreningen", 2500, 9);
+g = new GatJävel("Programmeringsgrottan", 2500, 10);
+h = new GatJävel("Biologin", 3000, 11);
+i = new GatJävel("Svenskan", 3500, 13);
+j = new GatJävel("Fotbollsplanen", 3500, 14);
+k = new GatJävel("", 3800, 15);
+l = new GatJävel("", 4200, 17);
+m = new GatJävel("", 4200, 18);
+n = new GatJävel("", 4500, 19);
+o = new GatJävel("", 5000, 21);
+p = new GatJävel("", 5000, 22);
+q = new GatJävel("", 5300, 23);
+r = new GatJävel("Biblioteket", 6000, 25);
+s = new GatJävel("Matte med Kenneth", 6000, 26);
+t = new GatJävel("Ljushallen", 6000, 27);
+u = new GatJävel("Örngottet", 6500, 29);
+v = new GatJävel("Naturgatan", 8000, 31);
 
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
@@ -130,9 +137,11 @@ function onButtonDown() {
 	
 }
 
-function ärGatanSåld(){
-		if typeOf(allaGator[currentLocation[playerTurn]].ägare) == 
-}
+/*function ärGatanSåld(){
+	if (typeOf(allaGator[currentLocation[playerTurn]].ägare) === 1) {
+		return true;
+	}
+}*/
 function speletsGång() {
 	setTimeout(function(){
 		var gameOver = false;
