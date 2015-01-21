@@ -73,7 +73,7 @@ function GatJävel(namn, pris, index) {
 	this.pris = pris;
 	this.index = index;
 }
-allaGator = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v];
+
 a = new GatJävel("Ekonomigatan", 1000, 1);
 b = new GatJävel("Webbutvecklingssalen", 1000, 2);
 c = new GatJävel("Franskan", 2000, 5);
@@ -96,7 +96,7 @@ s = new GatJävel("Matte med Kenneth", 6000, 26);
 t = new GatJävel("Ljushallen", 6000, 27);
 u = new GatJävel("Örngottet", 6500, 29);
 v = new GatJävel("Naturgatan", 8000, 31);
-
+allaGator = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v];
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
 	this.position = 0;
@@ -107,10 +107,10 @@ function Spelare(HereBeArgs) {
 
 function ritaGata(){
 	for (var i = 0; i < 7;i++){
-		nuGata = allaGator[i]
+		nuGata = allaGator[i];
 		if (nuGata.index === currentLocation[playerTurn]){
-			gatNamn.innerHTML = nuGata.namn
-			gatPris.innerHTML = nuGata.pris
+			gatNamn.innerHTML = nuGata.namn;
+			gatPris.innerHTML = nuGata.pris;
 		}
 	}
 }
