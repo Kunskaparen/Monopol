@@ -142,12 +142,19 @@ function onButtonDown() {
 	//enablar knappen
 }
 function gatuKöp(){
+	var listIndex;
 	if (ärGatanSåld()){
-		if (allaGator[currentLocation[playerTurn]].ägare == playerTurn){
-			console.log("Du äger gatan");
+		for (var i = 0; i < 22; i++) {
+			if (allaGator[i].index === currentLocation[playerTurn]) {
+				listIndex = i;
+				break;
+			}
 		}
+		if (allaGator[listIndex].ägare === playerTurn){
+				console.log("Du äger redan gatan");
+			}
 		else {
-				console.log("Betala som fan")
+				console.log("Betala som fan");
 				/*här blir det svinhög hyra*/
 		}
 	}
@@ -167,7 +174,13 @@ function gatuKöp(){
 }
 
 function ärGatanSåld(){
-		if (typeof allaGator[currentLocation[playerTurn]].ägare == "undefined"){
+		for (var i = 0; i < 22; i++) {
+			if (allaGator[i].index === currentLocation[playerTurn]) {
+				listIndex = i;
+				break;
+			}
+		}
+		if (typeof allaGator[i].ägare == "undefined"){
 			return false;
 		}
 		else {
