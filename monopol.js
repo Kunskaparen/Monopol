@@ -73,23 +73,30 @@ function GatJävel(namn, pris, index) {
 	this.pris = pris;
 	this.index = index;
 }
-allaGator = []
-västerlånggatan = new GatJävel("Ekonomigatan", 1000, 1);
-horn = new GatJävel("Webbutvecklingssalen", 1000, 2);
+
+a = new GatJävel("Ekonomigatan", 1000, 1);
+b = new GatJävel("Webbutvecklingssalen", 1000, 2);
 c = new GatJävel("Franskan", 2000, 5);
 d = new GatJävel("Husseins håla", 2000, 6);
 e = new GatJävel("Svenskan", 2000, 7);
-abc = new GatJävel("Disneyföreningen", 2500, 9);
-f = new GatJävel("Programmeringsgrottan", 2500, 10);
-g = new GatJävel("Biologin")
-/*h;
-i;
-j;
-k;
-l;*/
-allaGator.push(västerlånggatan,horn,c,d,e,abc,f,g)
-
-
+f = new GatJävel("Disneyföreningen", 2500, 9);
+g = new GatJävel("Programmeringsgrottan", 2500, 10);
+h = new GatJävel("Biologin", 3000, 11);
+i = new GatJävel("Svenskan", 3500, 13);
+j = new GatJävel("Fotbollsplanen", 3500, 14);
+k = new GatJävel("", 3800, 15);
+l = new GatJävel("", 4200, 17);
+m = new GatJävel("", 4200, 18);
+n = new GatJävel("", 4500, 19);
+o = new GatJävel("", 5000, 21);
+p = new GatJävel("", 5000, 22);
+q = new GatJävel("", 5300, 23);
+r = new GatJävel("Biblioteket", 6000, 25);
+s = new GatJävel("Matte med Kenneth", 6000, 26);
+t = new GatJävel("Ljushallen", 6000, 27);
+u = new GatJävel("Örngottet", 6500, 29);
+v = new GatJävel("Naturgatan", 8000, 31);
+allaGator = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v];
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
 	this.position = 0;
@@ -100,13 +107,18 @@ function Spelare(HereBeArgs) {
 
 function ritaGata(){
 	for (var i = 0; i < 7;i++){
-		nuGata = allaGator[i]
+		nuGata = allaGator[i];
 		if (nuGata.index === currentLocation[playerTurn]){
+<<<<<<< HEAD
 			gatNamn.innerHTML = nuGata.namn
 			gatPris.innerHTML = nuGata.pris
 			if (typeof nuGata.ägare != "undefined") {
 				gatÄgare.innerHTML = "Ägare: " + String(nuGata.ägare)
 			}
+=======
+			gatNamn.innerHTML = nuGata.namn;
+			gatPris.innerHTML = nuGata.pris;
+>>>>>>> 77890eeb1295ad6123f4390f5af3522d8fb4fcb2
 		}
 	}
 }
@@ -129,11 +141,11 @@ function onButtonDown() {
 			}, 300)
 		}
 		gåEttStegITagetTix(flyttningar);
-		
 	}, 7000)
 	
 }
 
+<<<<<<< HEAD
 function gatuKöp(){
 	if (ärGatanSåld()){
 		if (allaGator[currentLocation[playerTurn]].ägare == playerTurn){
@@ -161,6 +173,13 @@ function ärGatanSåld(){
 			return false
 		}
 }
+=======
+/*function ärGatanSåld(){
+	if (typeOf(allaGator[currentLocation[playerTurn]].ägare) === 1) {
+		return true;
+	}
+}*/
+>>>>>>> 77890eeb1295ad6123f4390f5af3522d8fb4fcb2
 function speletsGång() {
 	setTimeout(function(){
 		var gameOver = false;
