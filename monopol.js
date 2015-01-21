@@ -109,21 +109,17 @@ function ritaGata(){
 	for (var i = 0; i < 7;i++){
 		nuGata = allaGator[i];
 		if (nuGata.index === currentLocation[playerTurn]){
-<<<<<<< HEAD
-			gatNamn.innerHTML = nuGata.namn
-			gatPris.innerHTML = nuGata.pris
-			if (typeof nuGata.ägare != "undefined") {
-				gatÄgare.innerHTML = "Ägare: " + String(nuGata.ägare)
-			}
-=======
 			gatNamn.innerHTML = nuGata.namn;
 			gatPris.innerHTML = nuGata.pris;
->>>>>>> 77890eeb1295ad6123f4390f5af3522d8fb4fcb2
+			if (typeof nuGata.ägare != "undefined") {
+				gatÄgare.innerHTML = "Ägare: " + String(nuGata.ägare);
+			}
 		}
 	}
 }
 
 function onButtonDown() {
+	document.getElementById("slåKnapp").disabled = true; //disablar knappen
 	var flyttningar = die();
 	setTimeout(function(){
 		function gåEttStegITagetTix(i) {
@@ -138,27 +134,31 @@ function onButtonDown() {
 					speletsGång();	//speletsGång körs när slag och förflyttning är klart.
 				}
 			/*ritaGata();*/
-			}, 300)
+			}, 300);
 		}
 		gåEttStegITagetTix(flyttningar);
-	}, 7000)
-	
+		//FLYTTAD TILL SPELETSGÅNG document.getElementById("slåKnapp").disabled = false;
+	}, 7000);
+	//enablar knappen
 }
-
-<<<<<<< HEAD
 function gatuKöp(){
 	if (ärGatanSåld()){
 		if (allaGator[currentLocation[playerTurn]].ägare == playerTurn){
 			console.log("Du äger gatan");
 		}
+		else {
+				console.log("Betala som fan")
+				/*här blir det svinhög hyra*/
+		}
 	}
 	else {
-		if (confirm("Gatan är ledig/nVill du köpa den?")){
+		if (confirm("Gatan är ledig.\nVill du köpa den?")){
 			if (saldo[playerTurn] - parseInt(allaGator[currentLocation[playerTurn]].pris) >= 0){
-				allaGator[currentLocation[playerTurn]].ägare = playerTurn
+				saldo[playerTurn] -= parseInt(allaGator[currentLocation[playerTurn]].pris)
+				allaGator[currentLocation[playerTurn]].ägare = playerTurn;
 			}
 			else{
-				alert("En fattiglapp som du är sist innan du ens börjat/nDu har inte råd");
+				alert("En fattiglapp som du är sist innan du ens börjat.\nDu har inte råd.");
 			}
 		}
 	}
@@ -167,19 +167,13 @@ function gatuKöp(){
 
 function ärGatanSåld(){
 		if (typeof allaGator[currentLocation[playerTurn]].ägare == "undefined"){
-			return true
+			return false;
 		}
 		else {
-			return false
+			return true;
 		}
 }
-=======
-/*function ärGatanSåld(){
-	if (typeOf(allaGator[currentLocation[playerTurn]].ägare) === 1) {
-		return true;
-	}
-}*/
->>>>>>> 77890eeb1295ad6123f4390f5af3522d8fb4fcb2
+
 function speletsGång() {
 	setTimeout(function(){
 		var gameOver = false;
@@ -192,17 +186,18 @@ function speletsGång() {
 			}
 			saldoPrint();
 			*/
-			gatuKöp()
+			gatuKöp();
 			for (var k = 1; k <= antalSpelare; k++) {
 				ritaPjäs(k);
 			}
 			console.log("antalSpelare = " + antalSpelare);
 			console.log("Spelare " + playerTurn + "'s tur");
 			nextPlayer();
+			document.getElementById("slåKnapp").disabled = false;
 			console.log("Spelare " + playerTurn + "'s tur");
 		gameOver = true;
 		}
-	}, 500)
+	}, 500);
 }
 
 function nextPlayer() {
@@ -327,9 +322,9 @@ function die() {
 			if (--i) {
 				slåTärning(i);
 			}
-		}, 300)
+		}, 300);
 	}
-	slåTärning(antalRullningar)
+	slåTärning(antalRullningar);
 	console.log("Returnar: " + results[1] + " när i = " + i);
 	return results[1];
 }
