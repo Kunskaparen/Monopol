@@ -111,7 +111,7 @@ function ritaGata(){
 		if (nuGata.index === currentLocation[playerTurn]){
 			gatNamn.innerHTML = nuGata.namn;
 			gatPris.innerHTML = nuGata.pris;
-			if (typeof nuGata.ägare != "undefined") {
+			if (typeof nuGata.ägare !== "undefined") {
 				gatÄgare.innerHTML = "Ägare: " + String(nuGata.ägare);
 			}
 		}
