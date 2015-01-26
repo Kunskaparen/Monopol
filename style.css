@@ -39,13 +39,16 @@ p {
 	top:90px;
 }
 
+.knapp {
+	border-width: 1px;
+	border-color:black;
+	color:white;
+}
+
 #slåKnapp {
 	position:relative;
 	left: 35px;
 	background-color: #4CA6FF;
-	border-width: 1px;
-	border-color:black;
-	color:white;
 	height:60px;
 	width:150px;
 }
@@ -58,4 +61,12 @@ p {
 #överförSumma {
 	position:absolute;
 	left:270px;
+}
+
+#nyttSpel {
+	left:-115px;
+	position:relative;
+	background-color:#228B22;
+	height:60px;
+	width:150px;
 }

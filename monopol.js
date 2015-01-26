@@ -57,6 +57,16 @@ window.onload = function init() {
 		}())*/
 		saldoPrint();
 		slåTobbe();
+		(function(){
+			nyttSpel = document.createElement("button");
+			nyttSpel.setAttribute("type", "button");
+			nyttSpel.setAttribute("id", "nyttSpel");
+			nyttSpel.setAttribute("class", "knapp");
+			document.getElementById("farsa").appendChild(nyttSpel);
+			document.getElementById("nyttSpel").innerHTML = "Nytt spel";
+			document.getElementById("nyttSpel").style.top = String(30*antalSpelare+70)+"px";
+			document.getElementById("nyttSpel").addEventListener("click", spelaOm);
+		}())
 		ritaOm();
 		
 		
@@ -73,30 +83,40 @@ function GatJävel(namn, pris, index) {
 	this.pris = pris;
 	this.index = index;
 }
-
+gå = new GatJävel("Gå", 4000, 0);
 aa = new GatJävel("Ekonomigatan", 1000, 1);
 ab = new GatJävel("Webbutvecklingssalen", 1000, 2);
+inkomstskatt = new GatJävel("Inkomstskatt", 4000, 3);
+station1 = new GatJävel("Frukthörnan", 4000, 4);
 ac = new GatJävel("Franskan", 2000, 5);
 ad = new GatJävel("Husseins håla", 2000, 6);
 ae = new GatJävel("Svenskan", 2000, 7);
+finkan = new GatJävel("Sjuksysters kontor", 0, 8);
 af = new GatJävel("Disneyföreningen", 2500, 9);
 ag = new GatJävel("Programmeringsgrottan", 2500, 10);
 ah = new GatJävel("Biologin", 3000, 11);
+station2 = new GatJävel("Skåphallen", 4000, 12);
 ai = new GatJävel("Svenskan", 3500, 13);
 aj = new GatJävel("Fotbollsplanen", 3500, 14);
 ak = new GatJävel("Staffans lya", 3800, 15);
+friParkering = new GatJävel("Chilla i gympasalen", 0, 16);
 al = new GatJävel("Trapphuset", 4200, 17);
 am = new GatJävel("Amfiteater", 4200, 18);
 an = new GatJävel("SYV:en", 4500, 19);
+station3 = new GatJävel("Sköldpaddsterrariumet", 4000, 20);
 ao = new GatJävel("Kansliet", 5000, 21);
 ap = new GatJävel("N1B", 5000, 22);
 aq = new GatJävel("Aulan", 5300, 23);
+gåIfinkan = finkan = new GatJävel("Benbrott, gå till syster", 0, 24);
 ar = new GatJävel("Biblioteket", 6000, 25);
 as = new GatJävel("Matte med Kenneth", 6000, 26);
 at = new GatJävel("Ljushallen", 6000, 27);
+station4 = new GatJävel("", 4000, 28); //s
 au = new GatJävel("Örngottet", 6500, 29);
+lyxSkatt = new GatJävel("Lyxskatt", 0, 30); //s
 av = new GatJävel("Naturgatan", 8000, 31);
-allaGator = [aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al,am,an,ao,ap,aq,ar,as,at,au,av];
+allaGator = [gå,aa,ab,inkomstskatt,station1,ac,ad,ae,finkan,af,ag,ah,station2,ai,aj,ak,friParkering,al,am,an,station3,ao,ap,aq,gåIfinkan,ar,as,at,station4,au,lyxSkatt,av];
+specialgator = [gå,inkomstskatt,station1,finkan,station2,friParkering,station3,gåIfinkan,station4,lyxSkatt]
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
 	this.position = 0;
@@ -141,6 +161,13 @@ function onButtonDown() {
 	}, 7000);
 	//enablar knappen
 }
+
+function spelaOm() {
+	if (confirm("Är du säker på att du vill starta ett nytt spel?")){
+			window.location.reload();
+	}
+}
+
 function gatuKöp(){
 	var listIndex;
 	for (var i = 0; i < 22; i++) {
@@ -253,6 +280,7 @@ function slåTobbe() {
 	slåKnapp = document.createElement("button");
 	slåKnapp.setAttribute("type", "button");
 	slåKnapp.setAttribute("id", "slåKnapp");
+	slåKnapp.setAttribute("class", "knapp");
 	document.getElementById("farsa").appendChild(slåKnapp);
 	document.getElementById("slåKnapp").innerHTML = "Slå tärningen!";
 	document.getElementById("slåKnapp").style.top = String(30*antalSpelare)+"px";
