@@ -227,7 +227,20 @@ function speletsGång() {
 			}
 			saldoPrint();
 			*/
-			gatuKöp();
+			if (ärSpecialGata()){
+				//hantering för specialgator
+				currentLocation[playerTurn] = nuGata
+				if (nuGata.index === 0){
+					//hur fan hanterar man gå?
+				}
+				else if (nuGata.index === 3){
+					saldo[playerTurn] -= 4000
+				}
+			}
+			else{
+				gatuKöp();
+			}
+			ritaGata();
 			for (var k = 1; k <= antalSpelare; k++) {
 				ritaPjäs(k);
 			}
@@ -310,6 +323,15 @@ function överföring(betalare, mottagare, summa) {
 	else {
 		saldo[betalare] = parseInt(saldo[betalare]) - parseInt(summa);
 	saldo[mottagare] = parseInt(saldo[mottagare]) + parseInt(summa);
+	}
+}
+
+function ärSpecialGata() {
+	if (indexOf(currentLocation[playerTurn]) > -1){
+			return true
+	}
+	else {
+		return false
 	}
 }
 
