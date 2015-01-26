@@ -74,29 +74,29 @@ function GatJävel(namn, pris, index) {
 	this.index = index;
 }
 
-a = new GatJävel("Ekonomigatan", 1000, 1);
-b = new GatJävel("Webbutvecklingssalen", 1000, 2);
-c = new GatJävel("Franskan", 2000, 5);
-d = new GatJävel("Husseins håla", 2000, 6);
-e = new GatJävel("Svenskan", 2000, 7);
-f = new GatJävel("Disneyföreningen", 2500, 9);
-g = new GatJävel("Programmeringsgrottan", 2500, 10);
-h = new GatJävel("Biologin", 3000, 11);
-i = new GatJävel("Svenskan", 3500, 13);
-j = new GatJävel("Fotbollsplanen", 3500, 14);
-k = new GatJävel("", 3800, 15);
-l = new GatJävel("", 4200, 17);
-m = new GatJävel("", 4200, 18);
-n = new GatJävel("", 4500, 19);
-o = new GatJävel("", 5000, 21);
-p = new GatJävel("", 5000, 22);
-q = new GatJävel("", 5300, 23);
-r = new GatJävel("Biblioteket", 6000, 25);
-s = new GatJävel("Matte med Kenneth", 6000, 26);
-t = new GatJävel("Ljushallen", 6000, 27);
-u = new GatJävel("Örngottet", 6500, 29);
-v = new GatJävel("Naturgatan", 8000, 31);
-allaGator = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v];
+aa = new GatJävel("Ekonomigatan", 1000, 1);
+ab = new GatJävel("Webbutvecklingssalen", 1000, 2);
+ac = new GatJävel("Franskan", 2000, 5);
+ad = new GatJävel("Husseins håla", 2000, 6);
+ae = new GatJävel("Svenskan", 2000, 7);
+af = new GatJävel("Disneyföreningen", 2500, 9);
+ag = new GatJävel("Programmeringsgrottan", 2500, 10);
+ah = new GatJävel("Biologin", 3000, 11);
+ai = new GatJävel("Svenskan", 3500, 13);
+aj = new GatJävel("Fotbollsplanen", 3500, 14);
+ak = new GatJävel("Staffans lya", 3800, 15);
+al = new GatJävel("Trapphuset", 4200, 17);
+am = new GatJävel("Amfiteater", 4200, 18);
+an = new GatJävel("SYV:en", 4500, 19);
+ao = new GatJävel("Kansliet", 5000, 21);
+ap = new GatJävel("N1B", 5000, 22);
+aq = new GatJävel("Aulan", 5300, 23);
+ar = new GatJävel("Biblioteket", 6000, 25);
+as = new GatJävel("Matte med Kenneth", 6000, 26);
+at = new GatJävel("Ljushallen", 6000, 27);
+au = new GatJävel("Örngottet", 6500, 29);
+av = new GatJävel("Naturgatan", 8000, 31);
+allaGator = [aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al,am,an,ao,ap,aq,ar,as,at,au,av];
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
 	this.position = 0;
@@ -142,24 +142,31 @@ function onButtonDown() {
 	//enablar knappen
 }
 function gatuKöp(){
-	if (ärGatanSåld()){
-		if (allaGator[currentLocation[playerTurn]].ägare == playerTurn){
-			console.log("Du äger gatan");
+	var listIndex;
+	for (var i = 0; i < 22; i++) {
+		if (allaGator[i].index === currentLocation[playerTurn]) {
+			listIndex = i;
+			break;
 		}
+	}
+	if (ärGatanSåld()){
+		if (allaGator[listIndex].ägare === playerTurn){
+				console.log("Du äger redan gatan");
+			}
 		else {
-				console.log("Betala som fan")
+				console.log("Betala som fan");
 				/*här blir det svinhög hyra*/
 		}
 	}
 	else {
 		if (confirm("Gatan är ledig.\nVill du köpa den?")){
-			if (saldo[playerTurn] - parseInt(allaGator[currentLocation[playerTurn]-1].pris) >= 0){
-				saldo[playerTurn] = saldo[playerTurn] - parseInt(allaGator[currentLocation[playerTurn]-1].pris)
-				allaGator[currentLocation[playerTurn]-1].ägare = playerTurn;
+			if (saldo[playerTurn] - parseInt(allaGator[listIndex].pris) >= 0){
+				saldo[playerTurn] = saldo[playerTurn] - parseInt(allaGator[listIndex].pris)
+				allaGator[listIndex].ägare = playerTurn;
 				saldoPrint();
 			}
 			else{
-				alert("En fattiglapp som du är sist innan du ens börjat.\nDu har inte råd.");
+				alert("En fattiglapp som du är sist innan du ens börjat.\nDu har inte råd.\n\n\n\n...och du är ful.");
 			}
 		}
 	}
@@ -167,7 +174,13 @@ function gatuKöp(){
 }
 
 function ärGatanSåld(){
-		if (typeof allaGator[currentLocation[playerTurn]].ägare == "undefined"){
+		for (var i = 0; i < 22; i++) {
+			if (allaGator[i].index === currentLocation[playerTurn]) {
+				listIndex = i;
+				break;
+			}
+		}
+		if (typeof allaGator[i].ägare == "undefined"){
 			return false;
 		}
 		else {
