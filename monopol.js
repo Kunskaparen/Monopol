@@ -116,7 +116,7 @@ au = new GatJävel("Örngottet", 6500, 29);
 lyxSkatt = new GatJävel("Lyxskatt", 0, 30); //s
 av = new GatJävel("Naturgatan", 8000, 31);
 allaGator = [gå,aa,ab,inkomstskatt,station1,ac,ad,ae,finkan,af,ag,ah,station2,ai,aj,ak,friParkering,al,am,an,station3,ao,ap,aq,gåIfinkan,ar,as,at,station4,au,lyxSkatt,av];
-specialgator = [gå,inkomstskatt,station1,finkan,station2,friParkering,station3,gåIfinkan,station4,lyxSkatt]
+specialGator = [gå,inkomstskatt,station1,finkan,station2,friParkering,station3,gåIfinkan,station4,lyxSkatt]
 //HERE BE SPELARKLASS
 function Spelare(HereBeArgs) {
 	this.position = 0;
@@ -126,13 +126,28 @@ function Spelare(HereBeArgs) {
 }
 
 function ritaGata(){
-	for (var i = 0; i < 7;i++){
+	for (var i = 0; i < allaGator.length;i++){
 		nuGata = allaGator[i];
 		if (nuGata.index === currentLocation[playerTurn]){
 			gatNamn.innerHTML = nuGata.namn;
-			gatPris.innerHTML = nuGata.pris;
+			gatPris.innerHTML = "Pris: " + String(nuGata.pris);
 			if (typeof nuGata.ägare !== "undefined") {
-				gatÄgare.innerHTML = "Ägare: " + String(nuGata.ägare);
+				gatÄgare.innerHTML = "Ägare: spelare " + String(nuGata.ägare);
+				if (nuGata.ägare === 1){
+					gatÄgare.style.color = "green"
+				}
+				else if (nuGata.ägare === 2){
+					gatÄgare.style.color = "blue"
+				}
+				else if (nuGata.ägare === 3){
+					gatÄgare.style.color = "red"
+				}
+				else if (nuGata.ägare === 4){
+					gatÄgare.style.color = "yellow"
+				}
+			}
+			else {
+				gatÄgare.innerHTML = ""
 			}
 		}
 	}
@@ -170,7 +185,7 @@ function spelaOm() {
 
 function gatuKöp(){
 	var listIndex;
-	for (var i = 0; i < 22; i++) {
+	for (var i = 0; i < allaGator.length; i++) {
 		if (allaGator[i].index === currentLocation[playerTurn]) {
 			listIndex = i;
 			break;
@@ -178,9 +193,10 @@ function gatuKöp(){
 	}
 	if (ärGatanSåld()){
 		if (allaGator[listIndex].ägare === playerTurn){
-				console.log("Du äger redan gatan");
+				alert("Du äger redan gatan");
 			}
 		else {
+				alert("Gatan är ägd av spelare " + String(currentLocation[playerTurn].ägare) )
 				console.log("Betala som fan");
 				/*här blir det svinhög hyra*/
 		}
@@ -193,7 +209,7 @@ function gatuKöp(){
 				saldoPrint();
 			}
 			else{
-				alert("En fattiglapp som du är sist innan du ens börjat.\nDu har inte råd.\n\n\n\n...och du är ful.");
+				alert("En fattiglapp som du är sist innan du ens börjat.\nDu har inte råd.");
 			}
 		}
 	}
@@ -228,19 +244,32 @@ function speletsGång() {
 			saldoPrint();
 			*/
 			if (ärSpecialGata()){
-				//hantering för specialgator
-				currentLocation[playerTurn] = nuGata
-				if (nuGata.index === 0){
-					//hur fan hanterar man gå?
+				//hantering för specialGator
+				  
+				if (allaGator[currentLocation[playerTurn]].index === 0){
+					//gå
 				}
-				else if (nuGata.index === 3){
-					saldo[playerTurn] -= 4000
+				else if (allaGator[currentLocation[playerTurn]].index === 3){
+					saldo[playerTurn] -= 4000;
+					gatPris.innerHTML = ""
+					gatÄgare.innerHeight = ""
+					alert("Betala inkomstskatt")
+					saldoPrint();
+				}
+				else if (allaGator[currentLocation[playerTurn]].index === 4){
+					//tågstation
+				}
+				else if (allaGator[currentLocation[playerTurn]].index === 8){
+					//skriv på besök hos syster
+					document.getElementById("gatNamn").innerHTML = "Sjuksysters kontor"
+					document.getElementById("gatÄgare").innerHTML = ""
+					document.getElementById("gatPris").innerHTML = ""
 				}
 			}
 			else{
 				gatuKöp();
+				ritaGata();
 			}
-			ritaGata();
 			for (var k = 1; k <= antalSpelare; k++) {
 				ritaPjäs(k);
 			}
@@ -327,8 +356,8 @@ function överföring(betalare, mottagare, summa) {
 }
 
 function ärSpecialGata() {
-	if (indexOf(currentLocation[playerTurn]) > -1){
-			return true
+	if (specialGator.indexOf(allaGator[currentLocation[playerTurn]]) > -1){
+		return true
 	}
 	else {
 		return false
