@@ -78,43 +78,44 @@ window.onload = function init() {
 };
 
 //HERE BE GATA
-function GatJävel(namn, pris, index) {
+function GatJävel(namn, pris, index,hyra) {
 	this.namn = namn;
 	this.pris = pris;
 	this.index = index;
+	this.hyra = hyra
 }
 gå = new GatJävel("Gå", 4000, 0);
-aa = new GatJävel("Ekonomigatan", 1000, 1);
-ab = new GatJävel("Webbutvecklingssalen", 1000, 2);
-inkomstskatt = new GatJävel("Inkomstskatt", 4000, 3);
-station1 = new GatJävel("Frukthörnan", 4000, 4);
-ac = new GatJävel("Franskan", 2000, 5);
-ad = new GatJävel("Husseins håla", 2000, 6);
-ae = new GatJävel("Svenskan", 2000, 7);
+aa = new GatJävel("Ekonomigatan", 1000, 1, 200);
+ab = new GatJävel("Webbutvecklingssalen", 1000, 2, 200);
+inkomstskatt = new GatJävel("Inkomstskatt", 4000, 3,800);
+station1 = new GatJävel("Frukthörnan", 4000, 4,800);
+ac = new GatJävel("Franskan", 2000, 5,400);
+ad = new GatJävel("Husseins håla", 2000, 6,400);
+ae = new GatJävel("Svenskan", 2000, 7,400);
 finkan = new GatJävel("Sjuksysters kontor", 0, 8);
-af = new GatJävel("Disneyföreningen", 2500, 9);
-ag = new GatJävel("Programmeringsgrottan", 2500, 10);
-ah = new GatJävel("Biologin", 3000, 11);
-station2 = new GatJävel("Skåphallen", 4000, 12);
-ai = new GatJävel("Svenskan", 3500, 13);
-aj = new GatJävel("Fotbollsplanen", 3500, 14);
-ak = new GatJävel("Staffans lya", 3800, 15);
+af = new GatJävel("Disneyföreningen", 2500, 9,500);
+ag = new GatJävel("Programmeringsgrottan", 2500, 10,500);
+ah = new GatJävel("Biologin", 3000, 11, 600);
+station2 = new GatJävel("Skåphallen", 4000, 12, 800);
+ai = new GatJävel("Svenskan", 3500, 13, 700);
+aj = new GatJävel("Fotbollsplanen", 3500, 14,700);
+ak = new GatJävel("Staffans lya", 3800, 15,760);
 friParkering = new GatJävel("Chilla i gympasalen", 0, 16);
-al = new GatJävel("Trapphuset", 4200, 17);
-am = new GatJävel("Amfiteater", 4200, 18);
-an = new GatJävel("SYV:en", 4500, 19);
-station3 = new GatJävel("Sköldpaddsterrariumet", 4000, 20);
-ao = new GatJävel("Kansliet", 5000, 21);
-ap = new GatJävel("N1B", 5000, 22);
-aq = new GatJävel("Aulan", 5300, 23);
+al = new GatJävel("Trapphuset", 4200, 17,840);
+am = new GatJävel("Amfiteater", 4200, 18,840);
+an = new GatJävel("SYV:en", 4500, 19,900);
+station3 = new GatJävel("Sköldpaddsterrariumet", 4000, 20,900);
+ao = new GatJävel("Kansliet", 5000, 21,1000);
+ap = new GatJävel("N1B", 5000, 22,1000);
+aq = new GatJävel("Aulan", 5300, 23,1000);
 gåIfinkan = finkan = new GatJävel("Benbrott, gå till syster", 0, 24);
-ar = new GatJävel("Biblioteket", 6000, 25);
-as = new GatJävel("Matte med Kenneth", 6000, 26);
-at = new GatJävel("Ljushallen", 6000, 27);
-station4 = new GatJävel("", 4000, 28); //s
-au = new GatJävel("Örngottet", 6500, 29);
+ar = new GatJävel("Biblioteket", 6000, 25,1200);
+as = new GatJävel("Matte med Kenneth", 6000, 26,1200);
+at = new GatJävel("Ljushallen", 6000, 27,1200);
+station4 = new GatJävel("", 4000, 28,600); //s
+au = new GatJävel("Örngottet", 6500, 29,1300);
 lyxSkatt = new GatJävel("Lyxskatt", 0, 30); //s
-av = new GatJävel("Naturgatan", 8000, 31);
+av = new GatJävel("Naturgatan", 8000, 31,1600);
 allaGator = [gå,aa,ab,inkomstskatt,station1,ac,ad,ae,finkan,af,ag,ah,station2,ai,aj,ak,friParkering,al,am,an,station3,ao,ap,aq,gåIfinkan,ar,as,at,station4,au,lyxSkatt,av];
 specialGator = [gå,inkomstskatt,station1,finkan,station2,friParkering,station3,gåIfinkan,station4,lyxSkatt]
 //HERE BE SPELARKLASS
@@ -196,7 +197,10 @@ function gatuKöp(){
 				alert("Du äger redan gatan");
 			}
 		else {
-				alert("Gatan är ägd av spelare " + String(currentLocation[playerTurn].ägare) )
+				alert("Gatan är ägd av spelare " + String(allaGator[currentLocation[playerTurn]].ägare))
+				saldo[playerTurn] -= allaGator[currentLocation[playerTurn]].hyra;
+				saldo[allaGator[currentLocation[playerTurn]].ägare] += allaGator[currentLocation[playerTurn]].hyra;
+				saldoPrint();
 				console.log("Betala som fan");
 				/*här blir det svinhög hyra*/
 		}
@@ -264,6 +268,14 @@ function speletsGång() {
 					document.getElementById("gatNamn").innerHTML = "Sjuksysters kontor"
 					document.getElementById("gatÄgare").innerHTML = ""
 					document.getElementById("gatPris").innerHTML = ""
+				}
+				else if (allaGator[currentLocation[playerTurn]].index === 30){
+					saldo[playerTurn] -= 3000;
+					gatPris.innerHTML = ""
+					gatÄgare.innerHeight = ""
+					alert("Betala lyxskatt")
+					saldoPrint();
+
 				}
 			}
 			else{
