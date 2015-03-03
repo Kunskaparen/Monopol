@@ -197,7 +197,7 @@ function gatuKöp(){
 				alert("Du äger redan gatan");
 			}
 		else {
-				alert("Gatan är ägd av spelare " + String(allaGator[currentLocation[playerTurn]].ägare))
+				alert("Gatan är ägd av spelare " + String(allaGator[currentLocation[playerTurn]].ägare) + ", betala " + String(allaGator[currentLocation[playerTurn]].hyra) + " 	paulingar" )
 				saldo[playerTurn] -= allaGator[currentLocation[playerTurn]].hyra;
 				saldo[allaGator[currentLocation[playerTurn]].ägare] += allaGator[currentLocation[playerTurn]].hyra;
 				saldoPrint();
@@ -289,6 +289,11 @@ function speletsGång() {
 			console.log("Spelare " + playerTurn + "'s tur");
 			nextPlayer();
 			document.getElementById("slåKnapp").disabled = false;
+			for (i=1;antalSpelare;i++){
+				if (saldo[i] == 0){
+					//eliminera en spelare
+				}
+			}
 			console.log("Spelare " + playerTurn + "'s tur");
 		gameOver = true;
 		}
