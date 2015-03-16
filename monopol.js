@@ -265,11 +265,21 @@ function speletsGång() {
 					//tågstation
 					antalstationer = 0
 					if (typeof(allaGator[currentLocation[playerTurn]].ägare) !== undefined){
-						if (allaGator[currentLocation[playerTurn]].ägare) !==  playerTurn){
+						if (allaGator[currentLocation[playerTurn]].ägare) !==  playerTurn) {
 							for (i = 1 ; i < allaGator.length;i++){
 								if (allaGator[i].index === 4 && allaGator[i].ägare === allaGator[currentLocation[playerTurn]].ägare){
-										
+								antalstationer += 1;
 								}
+      if (allaGator[i].index === 12  && allaGator[i].ägare === allaGator[currentLoc ation[playerTurn]].ägare){
+        antalstationer += 1
+      }
+      if (allaGator[i].index === 20  && allaGator[i].ägare === allaGator[currentLoc ation[playerTurn]].ägare){
+        antalstationer += 1
+      }
+      if (allaGator[i].index === 28 && allaGator[i].ägare === allaGator[currentLoc ation[playerTurn]].ägare){
+        antalstationer += 1
+      }
+
 								/*2**antalstationer-1 ANTALSTATIONER ÄR INTE EN RIKTIG VARIABEL */
 							}
 						}
@@ -316,7 +326,7 @@ function speletsGång() {
 
 function nextPlayer() {
 	if (playerTurn !== parseInt(antalSpelare)) {
-		playerTurn = playerTurn + 1;
+	playerTurn = playerTurn + 1;
 	}
 	else {
 		playerTurn = 1;
@@ -439,7 +449,7 @@ function die() {
 			}
 			else if (slag === 5){
 					context.drawImage(femma,canvas.width / 2 + planBild.width/2+10, 0);
-			}
+	}
 			else if (slag === 6){
 					context.drawImage(sexa,canvas.width / 2 + planBild.width/2+10, 0);
 			}
