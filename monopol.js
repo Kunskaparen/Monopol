@@ -254,14 +254,27 @@ function speletsGång() {
 					//gå
 				}
 				else if (allaGator[currentLocation[playerTurn]].index === 3){
-					saldo[playerTurn] -= 4000;
+					var inkomstskatt = 4000;
+					saldo[playerTurn] -= inkomstskatt;
 					gatPris.innerHTML = ""
 					gatÄgare.innerHeight = ""
-					alert("Betala inkomstskatt")
+					alert("Betala inkomstskatt " + inkomstskatt.toString() + " paulingar")
 					saldoPrint();
 				}
-				else if (allaGator[currentLocation[playerTurn]].index === 4){
+				else if (allaGator[currentLocation[playerTurn]].index === 4 || allaGator[currentLocation[playerTurn]].index === 12 || allaGator[currentLocation[playerTurn]].index === 20 || allaGator[currentLocation[playerTurn]].index === 28 ){
 					//tågstation
+					antalstationer = 0
+					if (typeof(allaGator[currentLocation[playerTurn]].ägare) !== undefined){
+						if (allaGator[currentLocation[playerTurn]].ägare) !==  playerTurn){
+							for (i = 1 ; i < allaGator.length;i++){
+								if (allaGator[i].index === 4 && allaGator[i].ägare === allaGator[currentLocation[playerTurn]].ägare){
+										
+								}
+								/*2**antalstationer-1 ANTALSTATIONER ÄR INTE EN RIKTIG VARIABEL */
+							}
+						}
+						
+					}
 				}
 				else if (allaGator[currentLocation[playerTurn]].index === 8){
 					//skriv på besök hos syster
@@ -270,10 +283,11 @@ function speletsGång() {
 					document.getElementById("gatPris").innerHTML = ""
 				}
 				else if (allaGator[currentLocation[playerTurn]].index === 30){
-					saldo[playerTurn] -= 3000;
+					var lyxskatt = 3000
+					saldo[playerTurn] -= lyxskatt;
 					gatPris.innerHTML = ""
 					gatÄgare.innerHeight = ""
-					alert("Betala lyxskatt")
+					alert("Betala lyxskatt " + lyxskatt.toString() + " paulingar")
 					saldoPrint();
 
 				}
@@ -289,8 +303,8 @@ function speletsGång() {
 			console.log("Spelare " + playerTurn + "'s tur");
 			nextPlayer();
 			document.getElementById("slåKnapp").disabled = false;
-			for (i=1;antalSpelare;i++){
-				if (saldo[i] == 0){
+			for (i = 1 ; i <= antalSpelare ;i++){
+				if (saldo[i] === 0){
 					//eliminera en spelare
 				}
 			}
