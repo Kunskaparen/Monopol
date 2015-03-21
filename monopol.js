@@ -197,7 +197,7 @@ function gatuKöp(){
 				alert("Du äger redan gatan");
 			}
 		else {
-				alert("Gatan är ägd av spelare " + String(allaGator[currentLocation[playerTurn]].ägare) + ", betala " + String(allaGator[currentLocation[playerTurn]].hyra) + " 	paulingar" )
+				alert("Gatan är ägd av spelare " + String(allaGator[currentLocation[playerTurn]].ägare) + ", betala " + String(allaGator[currentLocation[playerTurn]].hyra) + " paulingar" )
 				saldo[playerTurn] -= allaGator[currentLocation[playerTurn]].hyra;
 				saldo[allaGator[currentLocation[playerTurn]].ägare] += allaGator[currentLocation[playerTurn]].hyra;
 				saldoPrint();
@@ -265,23 +265,24 @@ function speletsGång() {
 					//tågstation
 					antalstationer = 0
 					if (typeof(allaGator[currentLocation[playerTurn]].ägare) !== undefined){
-						if (allaGator[currentLocation[playerTurn]].ägare) !==  playerTurn) {
+						if (!(allaGator[currentLocation[playerTurn]].ägare ===  playerTurn)) {
 							for (i = 1 ; i < allaGator.length;i++){
 								if (allaGator[i].index === 4 && allaGator[i].ägare === allaGator[currentLocation[playerTurn]].ägare){
 								antalstationer += 1;
 								}
-      if (allaGator[i].index === 12  && allaGator[i].ägare === allaGator[currentLoc ation[playerTurn]].ägare){
-        antalstationer += 1
-      }
-      if (allaGator[i].index === 20  && allaGator[i].ägare === allaGator[currentLoc ation[playerTurn]].ägare){
-        antalstationer += 1
-      }
-      if (allaGator[i].index === 28 && allaGator[i].ägare === allaGator[currentLoc ation[playerTurn]].ägare){
-        antalstationer += 1
-      }
-
+								if (allaGator[i].index === 12  && allaGator[i].ägare === allaGator[currentLocation[playerTurn]].ägare){
+									antalstationer += 1
+								}
+								if (allaGator[i].index === 20  && allaGator[i].ägare === allaGator[currentLocation[playerTurn]].ägare){
+									antalstationer += 1
+								}
+								if (allaGator[i].index === 28 && allaGator[i].ägare === allaGator[currentLocation[playerTurn]].ägare){
+									antalstationer += 1
+								}
 								/*2**antalstationer-1 ANTALSTATIONER ÄR INTE EN RIKTIG VARIABEL */
 							}
+							allaGator[currentLocation[playerTurn]].hyra = Math.pow(2, antalstationer-1)*800;
+							gatuKöp();
 						}
 						
 					}
