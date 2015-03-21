@@ -31,8 +31,17 @@ window.onload = function init() {
 		document.getElementById("gatFarsa").appendChild(gatPris);
 		document.getElementById("gatFarsa").appendChild(gatÄgare);
 		currentLocation = [];
+		död = [];
 		for (var i = 1; i <= antalSpelare; i++) {
 			currentLocation[i] = 0;
+		}
+		visatDöd = [];
+		for (var i = 1; i <= antalSpelare; i++) {
+			currentLocation[i] = 0;
+		}
+		
+		for (var i = 1; i <= antalSpelare; i++) {
+			död[i] = 0;
 		}
 		
 		saldo = [];
@@ -154,6 +163,19 @@ function ritaGata(){
 	}
 }
 
+function checkDead() {
+	for (var i = 1; i <= antalSpelare; i++) {
+		if (saldo[i] <= 0) {
+			if (!visatDöd[i]) {
+				alert("Spelare " + i + " är död. Han snubblade på en sten.");
+				visatDöd[i] = 1;
+			}
+			död[i] = 1;
+		}
+	}
+	ritaOm();
+}
+
 function onButtonDown() {
 	document.getElementById("slåKnapp").disabled = true; //disablar knappen
 	var flyttningar = die();
@@ -241,6 +263,7 @@ function speletsGång() {
 		while (!gameOver) {
 			/*Kör en listlookup som kollar aktiv spelares ruta och ritar ut motsvarande gata*/
 			//die()
+			
 			setTimeout(ritaGata(),5);
 			/*if (confirm("Vill du överföra?")) {
 				överföring(prompt("Betalare"), prompt("Mottagare"), prompt("Summa"));
@@ -304,12 +327,16 @@ function speletsGång() {
 				}
 			}
 			else{
+				
 				gatuKöp();
 				ritaGata();
 			}
+			checkDead(); //Här passar säkert den här in.
+			
 			for (var k = 1; k <= antalSpelare; k++) {
 				ritaPjäs(k);
 			}
+			
 			console.log("antalSpelare = " + antalSpelare);
 			console.log("Spelare " + playerTurn + "'s tur");
 			nextPlayer();
@@ -319,6 +346,7 @@ function speletsGång() {
 					//eliminera en spelare
 				}
 			}
+			ritaOm();
 			console.log("Spelare " + playerTurn + "'s tur");
 		gameOver = true;
 		}
@@ -332,6 +360,9 @@ function nextPlayer() {
 	else {
 		playerTurn = 1;
 	}
+	while (död[playerTurn]) {
+		playerTurn = playerTurn + 1;
+	}		
 }
 
 function flyttaPjäs(spelare, tärningsSlag) {
@@ -464,48 +495,50 @@ function die() {
 	return results[1];
 }
 function ritaPjäs(pjäs) {
-	var avstånd = 0.03;
-	if (pjäs === 1) {
-		 a = planBild.width * avstånd;
-		 b = planBild.width * avstånd;
-		 color = "#008744";
+	if (!död[pjäs]) {
+		var avstånd = 0.03;
+		if (pjäs === 1) {
+			 a = planBild.width * avstånd;
+			 b = planBild.width * avstånd;
+			 color = "#008744";
+		}
+		if (pjäs === 2) {
+			 a = planBild.width * avstånd * 2;
+			 b = planBild.width * avstånd;
+			 color = "#0057e7";
+		}
+		if (pjäs === 3) {
+			 a = planBild.width * avstånd;
+			 b = planBild.width * avstånd * 2;
+			 color = "#d62d20";
+		}
+		if (pjäs === 4) {
+			 a = planBild.width * avstånd * 2;
+			 b = planBild.width * avstånd * 2;
+			 color = "#ffa700";
+		}
+		
+		
+					//0 = Gå. Varje rutas storlek är 85*85
+		var rutor = {0:"25 25", 1:"135 25", 2:"244 25", 3:"353 25", 4:"462 25", 5:"570 25", 6:"680 25", 7:"788 25", 
+					8:"897 25", 9:"897 135", 10:"897 244", 11:"897 354", 12:"897 463", 13:"897 571", 14:"897 680", 15:"897 789",
+					16:"897 897", 17:"788 898", 18:"680 898", 19:"570 898", 20:"460 898", 21:"354 898", 22:"245 898", 23:"136 898", 
+					24:"28 898", 25:"28 789", 26:"28 680", 27:"28 571", 28:"28 463", 29:"28 354", 30:"28 244", 31:"28 135"};
+		
+		var cool = rutor[currentLocation[pjäs]];
+		
+		// Rita ut pjäs
+		context.beginPath();//Till kanten på planen		en bit in		förhållande				koordinat enligt paintbild 1000*1000
+		
+		context.fillStyle = color;
+		context.arc(canvas.width / 2 - planBild.width / 2 + a + (planBild.width * 0.001) * parseInt(cool.substring(0,cool.indexOf(" "))), // X-koordinat
+											b + (planBild.width * 0.001) * parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))), // Y-koordinat
+											8, // Pjässtorlek
+											0, // Rör ej
+											2*Math.PI); // Rör ej
+		context.closePath();
+		context.fill();
 	}
-	if (pjäs === 2) {
-		 a = planBild.width * avstånd * 2;
-		 b = planBild.width * avstånd;
-		 color = "#0057e7";
-	}
-	if (pjäs === 3) {
-		 a = planBild.width * avstånd;
-		 b = planBild.width * avstånd * 2;
-		 color = "#d62d20";
-	}
-	if (pjäs === 4) {
-		 a = planBild.width * avstånd * 2;
-		 b = planBild.width * avstånd * 2;
-		 color = "#ffa700";
-	}
-	
-	
-				//0 = Gå. Varje rutas storlek är 85*85
-	var rutor = {0:"25 25", 1:"135 25", 2:"244 25", 3:"353 25", 4:"462 25", 5:"570 25", 6:"680 25", 7:"788 25", 
-				8:"897 25", 9:"897 135", 10:"897 244", 11:"897 354", 12:"897 463", 13:"897 571", 14:"897 680", 15:"897 789",
-				16:"897 897", 17:"788 898", 18:"680 898", 19:"570 898", 20:"460 898", 21:"354 898", 22:"245 898", 23:"136 898", 
-				24:"28 898", 25:"28 789", 26:"28 680", 27:"28 571", 28:"28 463", 29:"28 354", 30:"28 244", 31:"28 135"};
-	
-	var cool = rutor[currentLocation[pjäs]];
-	
-	// Rita ut pjäs
-	context.beginPath();//Till kanten på planen		en bit in		förhållande				koordinat enligt paintbild 1000*1000
-	
-	context.fillStyle = color;
-	context.arc(canvas.width / 2 - planBild.width / 2 + a + (planBild.width * 0.001) * parseInt(cool.substring(0,cool.indexOf(" "))), // X-koordinat
-										b + (planBild.width * 0.001) * parseInt(cool.substring(cool.indexOf(" ") + 1, parseInt(cool.length))), // Y-koordinat
-										8, // Pjässtorlek
-										0, // Rör ej
-										2*Math.PI); // Rör ej
-	context.closePath();
-	context.fill();
 }
 
 function ritaOm() {
